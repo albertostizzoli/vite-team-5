@@ -4,10 +4,11 @@ import Apphome from "./pages/Apphome.vue";
 import AppCharacters from "./pages/AppCharacters.vue";
 import AppTypes from "./pages/AppTypes.vue";
 import AppItems from "./pages/AppItems.vue";
+import ShowCharacter from "./pages/ShowCharacter.vue";
 import NotFound from "./pages/NotFound.vue";
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: "/",
@@ -28,6 +29,11 @@ const router = createRouter({
       path: "/items",
       name: "items",
       component: AppItems,
+    },
+    {
+      path: "/characters/:id",
+      name: "show-character",
+      component: ShowCharacter,
     },
     {
       path: "/:pathMatch(.*)*",

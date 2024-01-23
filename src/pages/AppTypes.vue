@@ -1,18 +1,21 @@
 <template>
-    <div>
+    <section class="container">
+        <h2>Type</h2>
         <ul>
-            <li v-for="type in types">{{ type.name }}
-            <li>
+            <li v-for=" tipo in store.types">{{ tipo.name }}
+            </li>
         </ul>
-    </div>
+    </section>
 </template>
 
 <script>
+import { store } from '../store.js';
 export default {
+
     name: "AppTypes",
     data() {
         return {
-
+            store,
         }
     },
     methods: {

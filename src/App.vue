@@ -25,9 +25,23 @@ export default {
                 console.log(this.store.characters);
             })
         },
+        getAllItems() {
+            axios.get(this.store.apiUrl + "/items").then((res) => {
+                this.store.items = res.data.results;
+                console.log(`items`, this.store.items);
+            })
+        },
+        getAllTypes() {
+            axios.get(this.store.apiUrl + "/types").then((res) => {
+                this.store.types = res.data.results;
+                console.log(`types`, this.store.types);
+            })
+        },
     },
     mounted() {
         this.getAllCharacters();
+        this.getAllItems();
+        this.getAllTypes();
     },
 }
 </script>

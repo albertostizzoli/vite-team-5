@@ -1,7 +1,7 @@
 <template>
-    <div>
-
-    </div>
+    <section class="container">
+        Home
+    </section>
 </template>
 
 <script>
