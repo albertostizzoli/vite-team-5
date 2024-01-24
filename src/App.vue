@@ -1,7 +1,9 @@
 <template>
-    <AppHeader />
-    <router-view></router-view>
-    <FooterComponent />
+    <section class="position-relative">
+        <AppHeader />
+        <router-view class="router"></router-view>
+        <!--  <FooterComponent id="footer-component" /> -->
+    </section>
 </template>
 
 <script>
@@ -18,22 +20,9 @@ export default {
     data() {
         return {
             store,
-
         }
     },
     methods: {
-        getAllCharacters() {
-            axios.get(this.store.apiUrl + "/characters").then((res) => {
-                this.store.characters = res.data.results.data;
-                console.log(this.store.characters);
-            })
-        },
-        getAllItems() {
-            axios.get(this.store.apiUrl + "/items").then((res) => {
-                this.store.items = res.data.results;
-                console.log(`items`, this.store.items);
-            })
-        },
         getAllTypes() {
             axios.get(this.store.apiUrl + "/types").then((res) => {
                 this.store.types = res.data.results;
@@ -42,11 +31,13 @@ export default {
         },
     },
     mounted() {
-        this.getAllCharacters();
-        this.getAllItems();
         this.getAllTypes();
     },
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.router {
+    margin-bottom: 200px;
+}
+</style>
