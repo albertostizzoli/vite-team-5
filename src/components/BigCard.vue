@@ -5,7 +5,7 @@
                 <div class="m-4 m-lg-5">
                     <h1 class="display-5 fw-bold">Qui possiamo mettere il gioco</h1>
                     <p class="fs-4">Descrizione di come funziona il gioco</p>
-                    <a class="btn btn-primary btn-lg" href="#!">Pulsante che avvia la partita</a>
+                    <a class="btn  btn-lg" href="#!" :class="(store.selectedCharacterId && store.selectedItemId && store.selectedTypeId) ? 'btn-success' : 'btn-primary'">Pulsante che avvia la partita</a>
                 </div>
             </div>
         </div>
@@ -13,8 +13,14 @@
 </template>
 
 <script>
+import { store } from "../store.js";
 export default {
-    name: 'BigCard'
+    name: 'BigCard',
+    data(){
+        return {
+            store
+        }
+    },
 }
 </script>
 
