@@ -2,6 +2,14 @@
     <section class="pt-4 ">
         <div class="container px-lg-5">
             <h2 class="mb-5">Choose a Characters</h2>
+            <!-- PAGINATION -->
+            <div class="d-flex justify-content-between mb-5">
+                <button @click="previousPage" class="btn-next-prev"><span>Indietro</span></button>
+                <h5 class="mt-3">Current page: <span class="fw-bold">{{ currentPage }}</span> of <span class="fw-bold">{{
+                    lastPage }}</span></h5>
+                <button @click="nextPage" class="btn-next-prev">Avanti</button>
+            </div>
+            <!-- END PAGINATION -->
             <div class="row gx-lg-5">
                 <div class="col-lg-6 col-xxl-4 mb-5" v-for=" character in store.characters" :key="character.id">
                     <div class="card bg-light border-0 h-100">
@@ -19,6 +27,14 @@
                     </div>
                 </div>
             </div>
+            <!-- PAGINATION -->
+            <div class="d-flex justify-content-between mb-5">
+                <button @click="previousPage" class="btn-next-prev"><span>Indietro</span></button>
+                <h5 class="mt-3">Current page: <span class="fw-bold">{{ currentPage }}</span> of <span class="fw-bold">{{
+                    lastPage }}</span></h5>
+                <button @click="nextPage" class="btn-next-prev">Avanti</button>
+            </div>
+            <!-- END PAGINATION -->
         </div>
     </section>
 </template>
@@ -32,19 +48,39 @@ export default {
     data() {
         return {
             store,
-        }
+            currentPage: 1,
+            lastPage: 0,
+        };
     },
     methods: {
-        getAllChar() {
-            axios.get(`${this.store.apiUrl}/characters`).then((res) => {
+        getAllCharacters() {
+            axios.get(this.store.apiUrl + "/characters", { params: { page: this.currentPage } }).then((res) => {
                 this.store.characters = res.data.results.data;
-                console.log(`show dei caratteru`, this.store.characters);
+                console.log(`res data`, res.data.results);
+                console.log(this.store.characters);
+                /*  CURRENT E LAST PAGE */
+                this.currentPage = res.data.results.current_page;
+                this.lastPage = res.data.results.last_page;
             })
+        },
+        nextPage() {
+            if (this.currentPage < this.lastPage) {
+                this.currentPage = this.currentPage + 1;
+            } else {
+                this.currentPage = 1;
+            }
+            this.getAllCharacters();
+        },
+        previousPage() {
+            if (this.currentPage > 0) {
+                this.currentPage -= 1;
+                this.getAllCharacters();
+            }
         }
     },
     mounted() {
-        this.getAllChar();
-    }
+        this.getAllCharacters();
+    },
 }
 </script>
 
