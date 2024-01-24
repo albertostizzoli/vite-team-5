@@ -22,6 +22,8 @@
                                     {{ character.name }}
                                 </router-link>
                             </h2>
+                            <button class="btn " @click="selectCharacter(character)"
+                                :class="(store.selectedId == character.id) ? 'btn-success' : 'btn-primary'">Seleziona</button>
                             <p class="mb-0">{{ character.description }}</p>
                         </div>
                     </div>
@@ -51,6 +53,7 @@ export default {
             currentPage: 1,
             lastPage: 0,
         };
+
     },
     methods: {
         getAllCharacters() {
@@ -62,6 +65,12 @@ export default {
                 this.currentPage = res.data.results.current_page;
                 this.lastPage = res.data.results.last_page;
             })
+        },
+
+        selectCharacter(character) {
+            this.store.selectedCharacter = character;
+            this.store.selectedId = character.id;
+            console.log(this.store.selectedCharacter);
         },
         nextPage() {
             if (this.currentPage < this.lastPage) {
@@ -76,12 +85,17 @@ export default {
                 this.currentPage -= 1;
                 this.getAllCharacters();
             }
+
         }
+
     },
     mounted() {
         this.getAllCharacters();
     },
+
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>
