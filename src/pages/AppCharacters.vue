@@ -1,13 +1,25 @@
 <template>
-    <section class="container">
-        <h2>Character</h2>
-        <ul>
-            <li v-for=" character in store.characters" :key="character.id">
-                <router-link :to="{ name: 'show-character', params: { id: character.id } }">
-                    {{ character.name }}
-                </router-link>
-            </li>
-        </ul>
+    <section class="pt-4 ">
+        <div class="container px-lg-5">
+            <h2 class="mb-5">Choose a Characters</h2>
+            <div class="row gx-lg-5">
+                <div class="col-lg-6 col-xxl-4 mb-5" v-for=" character in store.characters" :key="character.id">
+                    <div class="card bg-light border-0 h-100">
+                        <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                            <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i
+                                    class="bi bi-collection"></i></div>
+                            <h2 class="fs-4 fw-bold">
+                                <router-link class="text-secondary text-decoration-none "
+                                    :to="{ name: 'show-character', params: { id: character.id } }">
+                                    {{ character.name }}
+                                </router-link>
+                            </h2>
+                            <p class="mb-0">{{ character.description }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 </template>
 
