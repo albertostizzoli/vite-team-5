@@ -22,8 +22,8 @@
                                     {{ character.name }}
                                 </router-link>
                             </h2>
-                            <button class="btn " @click="selectCharacter(character)"
-                                :class="(store.selectedCharacterId == character.id) ? 'btn-success' : 'btn-primary'">Seleziona</button>
+                            <button class="bottone " @click="selectCharacter(character)"
+                                :class="(store.selectedCharacterId == character.id) ? 'bottone-pieno' : 'bottone-vuoto'">{{(store.selectedCharacterId == character.id) ?'Selezionato' : 'Seleziona'}}</button>
                             <p class="mb-0">{{ character.description }}</p>
                         </div>
                     </div>

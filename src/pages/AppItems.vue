@@ -23,8 +23,8 @@
                                     {{ item.name }}
                                 </router-link>
                             </h2>
-                            <button class="btn " @click="selectItem(item)"
-                                :class="(store.selectedItemId == item.id) ? 'btn-success' : 'btn-primary'">Seleziona</button>
+                            <button class="bottone " @click="selectItem(item)"
+                                :class="(store.selectedItemId == item.id) ? 'bottone-pieno' : 'bottone-vuoto'">{{(store.selectedItemId == item.id) ?'Selezionato' : 'Seleziona'}}</button>
                             <p class="mb-0">{{ item.description }}</p>
                         </div>
                     </div>
