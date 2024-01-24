@@ -11,6 +11,11 @@
                             <h2 class="fs-4 fw-bold">
                                 {{ tipo.name }}
                             </h2>
+                            <button class="bottone " @click="selectType(tipo)"
+                                :class="(store.selectedTypeId == tipo.id) ? 'bottone-pieno' : 'bottone-vuoto'">
+                                {{(store.selectedTypeId == tipo.id) ?'Selezionato' : 'Seleziona'}}
+                            </button>
+                            <p class="mb-0">{{ tipo.description }}</p>
                         </div>
                     </div>
                 </div>
@@ -31,6 +36,16 @@ export default {
         }
     },
     methods: {
+        selectType(type) {
+            if(store.selectedTypeId === type.id){
+                store.selectedTypeId = "";
+                store.selectedType = {};
+                return
+            }
+            this.store.selectedType = type;
+            this.store.selectedTypeId = type.id;
+            console.log(this.store.selectedType);
+        },
 
     },
     mounted() {

@@ -22,8 +22,8 @@
                                     {{ character.name }}
                                 </router-link>
                             </h2>
-                            <button class="btn " @click="selectCharacter(character)"
-                                :class="(store.selectedId == character.id) ? 'btn-success' : 'btn-primary'">Seleziona</button>
+                            <button class="bottone " @click="selectCharacter(character)"
+                                :class="(store.selectedCharacterId == character.id) ? 'bottone-pieno' : 'bottone-vuoto'">{{(store.selectedCharacterId == character.id) ?'Selezionato' : 'Seleziona'}}</button>
                             <p class="mb-0">{{ character.description }}</p>
                         </div>
                     </div>
@@ -68,8 +68,13 @@ export default {
         },
 
         selectCharacter(character) {
+            if(store.selectedCharacterId === character.id){
+                store.selectedCharacterId = "";
+                store.selectedCharacter = {};
+                return
+            }
             this.store.selectedCharacter = character;
-            this.store.selectedId = character.id;
+            this.store.selectedCharacterId = character.id;
             console.log(this.store.selectedCharacter);
         },
         nextPage() {

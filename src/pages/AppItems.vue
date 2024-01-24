@@ -23,6 +23,9 @@
                                     {{ item.name }}
                                 </router-link>
                             </h2>
+                            <button class="bottone " @click="selectItem(item)"
+                                :class="(store.selectedItemId == item.id) ? 'bottone-pieno' : 'bottone-vuoto'">{{(store.selectedItemId == item.id) ?'Selezionato' : 'Seleziona'}}</button>
+                            <p class="mb-0">{{ item.description }}</p>
                         </div>
                     </div>
                 </div>
@@ -57,6 +60,16 @@ export default {
                     this.currentPage = res.data.results.current_page;
                     this.lastPage = res.data.results.last_page;
                 });
+        },
+        selectItem(item) {
+            if(store.selectedItemId === item.id){
+                store.selectedItemId = "";
+                store.selectedItem = {};
+                return
+            }
+            this.store.selectedItem = item;
+            this.store.selectedItemId = item.id;
+            console.log(this.store.selectedItem);
         },
         nextPage() {
             if (this.currentPage < this.lastPage) {
