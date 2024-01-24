@@ -9,4 +9,5 @@ export const store = reactive({
   selectedCharacter: {},
   selectedItem: {},
   selectedType: {},
+  selectedId: "",
 });
