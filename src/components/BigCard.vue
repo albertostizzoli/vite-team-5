@@ -6,19 +6,6 @@
                     <h1 class="display-5 fw-bold">Qui possiamo mettere il gioco</h1>
                     <p class="fs-4">Descrizione di come funziona il gioco</p>
                     <div class="w-100 bg-transparent  d-flex flex-row justify-content-between align-items-center p-2 my-0 " style="height: 700px;">
-                    <!-- <div class="w-25 h-75 bg-primary card text-white">
-                        <p class="py-2" v-if="store.selectedCharacter">{{ store.selectedCharacter.name}}</p>
-                        <div></div>
-                    </div>
-                    <div  class="w-25 h-75 bg-primary card text-white">
-                        <p class=" py-2" v-if="store.selectedItem">{{ store.selectedItem.name}}</p>
-                        <div></div>
-                    </div>
-                     <div  class="w-25 h-75 bg-primary card text-white">
-                        <p class="py-2" v-if="store.selectedType">{{ store.selectedType.name}}</p>
-                        <div></div>
-                     </div> -->
-
                      <!-- template card -->
                      <div class="card">
                         <div class="rectangle left-top"></div>
@@ -33,7 +20,7 @@
                             </svg>
                         </div>
                         <div class="love">
-                            <h5 class="text-white text-nowrap text-center w-100">{{ store.selectedCharacter.name ?? 'selezionare un character' }}</h5>
+                            <h5 class="text-white text-nowrap text-center w-100">{{ store.selectedCharacter.name ?? 'character' }}</h5>
                         </div>
                         <div class="category flex-wrap">
                             <button class="button" v-if="store.selectedCharacter.life">LIFE:&nbsp;{{store.selectedCharacter.life}}</button>
@@ -41,7 +28,11 @@
                             <button class="button" v-if="store.selectedCharacter.defence">DEFENCE:&nbsp; {{ store.selectedCharacter.defence}}</button>
                             <button class="button" v-if="store.selectedCharacter.speed">SPEED:&nbsp; {{store.selectedCharacter.speed}}</button>
                         </div>
-                        <button class="action">Action</button>
+                        <button class="action" :class="store.selectedCharacterId ? 'cambia' : 'scegli'">
+                            <router-link :to="{ name: 'characters' }" class="nav-link" active-class="active">
+                                {{  store.selectedCharacterId ? 'cambia' :  'scegli'}}
+                            </router-link>
+                        </button>
                     </div>
                     <!-- endtemplate -->
 
@@ -59,14 +50,18 @@
                             </svg>
                         </div>
                         <div class="love">
-                            <h5 class="text-white text-center w-100">{{ store.selectedItem.name ?? 'selezionare un item' }}</h5>
+                            <h5 class="text-white text-center w-100">{{ store.selectedItem.name ?? 'item' }}</h5>
                         </div>
                         <div class="category flex-wrap">
                             <button class="button" v-if="store.selectedItem.type">TYPE: {{ store.selectedItem.type }}</button>
                             <button class="button" v-if="store.selectedItem.weight">WEIGHT: {{ store.selectedItem.weight }}</button>
                             <button class="button" v-if="store.selectedItem.cost">COST: {{ store.selectedItem.cost }}</button>
                         </div>
-                        <button class="action">Action</button>
+                        <button class="action" :class="store.selectedItemId ?  ' cambia' : ' scegli'">
+                            <router-link :to="{ name: 'items' }" class="nav-link" active-class="active">
+                                {{  store.selectedItemId ? 'cambia' :  'scegli'}}
+                            </router-link>
+                        </button>
                     </div>
                     <!-- endtemplate -->
 
@@ -84,11 +79,15 @@
                             </svg>
                         </div>
                         <div class="love">
-                            <h5 class="text-white text-center w-100 ">{{ store.selectedType.name ?? 'selezionare un tipo' }}</h5>
+                            <h5 class="text-white text-center w-100 ">{{ store.selectedType.name ?? 'type' }}</h5>
                         </div>
                         <div class="category">
                         </div>
-                        <button class="action">Action</button>
+                        <button class="action" :class="store.selectedTypeId ? ' cambia' : ' scegli'">
+                            <router-link :to="{ name: 'types' }" class="nav-link" active-class="active">
+                                {{ store.selectedTypeId ? 'cambia'  : 'scegli'}}
+                            </router-link>
+                        </button>
                     </div>
                     <!-- endtemplate -->
                 </div>
@@ -112,6 +111,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.scegli{
+    background-color: var(--red-400)!important;
+}
+
+.cambia{
+    background-color: yellow!important;
+}
+
+
 // template card css
 
 .card {
