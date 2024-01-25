@@ -23,15 +23,9 @@ export default {
         }
     },
     methods: {
-        getAllTypes() {
-            axios.get(this.store.apiUrl + "/types").then((res) => {
-                this.store.types = res.data.results;
-                console.log(`types`, this.store.types);
-            })
-        },
+      
     },
     mounted() {
-        this.getAllTypes();
     },
 }
 </script>

@@ -18,13 +18,14 @@
                                 <i class="bi bi-collection"></i>
                             </div>
                             <h2 class="fs-4 fw-bold">
-                                <router-link class="text-secondary text-decoration-none"
+                                <!-- <router-link class="text-secondary text-decoration-none"
                                     :to="{ name: 'items', params: { id: item.id } }">
                                     {{ item.name }}
-                                </router-link>
+                                </router-link> -->
+                                {{ item.name }}
                             </h2>
                             <button class="bottone " @click="selectItem(item)"
-                                :class="(store.selectedItemId == item.id) ? 'bottone-pieno' : 'bottone-vuoto'">{{(store.selectedItemId == item.id) ?'Selezionato' : 'Seleziona'}}</button>
+                                :class="(store.selectedItemId == item.id) ? 'bottone-pieno ' :  (store.CPUItemId == item.id) ? ' bottone-avversario ' : ' bottone-vuoto '">{{(store.selectedItemId == item.id) ?'Selezionato' : 'Seleziona'}}</button>
                             <p class="mb-0">{{ item.description }}</p>
                         </div>
                     </div>
@@ -61,6 +62,7 @@ export default {
                     this.lastPage = res.data.results.last_page;
                 });
         },
+        
         selectItem(item) {
             if(store.selectedItemId === item.id){
                 store.selectedItemId = "";
@@ -69,7 +71,19 @@ export default {
             }
             this.store.selectedItem = item;
             this.store.selectedItemId = item.id;
-            console.log(this.store.selectedItem);
+
+            console.log('non cambia',this.store.selectedItemId);
+            this.cpuSelection();
+        },
+        cpuSelection(){
+            this.store.CPUItemId= false
+            while (!this.store.CPUItemId || this.store.CPUItemId === this.store.selectedItemId && this.store.items.length === 1) {
+                this.store.CPUItemId  = Math.floor(Math.random() * (this.store.items.length)) + ((this.currentPage - 1)*9) +1
+            }
+            //console.log('id',this.store.CPUItemId  )
+            this.store.CPUItem= this.store.items[this.store.CPUItemId  - ((this.currentPage - 1)*9) -1];
+            //console.log('obj',this.store.selectedItem )
+
         },
         nextPage() {
             if (this.currentPage < this.lastPage) {
