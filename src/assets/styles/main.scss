@@ -10,7 +10,9 @@ $fa-font-path: '../webfonts';
 @import 'bootstrap/scss/bootstrap';
 
 
-
+body{
+  background-color: #070302;
+}
 //bottone
 
 .bottone {
@@ -63,8 +65,19 @@ $fa-font-path: '../webfonts';
   background-color: orange;
 }
 
+.box-image {
+  overflow: hidden;
 
+  img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+  }
+}
 
+.cp{
+  cursor: pointer;
+}
 
 
 
