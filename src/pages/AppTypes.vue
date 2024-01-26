@@ -12,7 +12,11 @@
                                     :alt="tipo.name">
                             </div>
                             <h2 class="fs-4 fw-bold">
-                                {{ tipo.name }}
+                                <router-link class="text-secondary text-decoration-none "
+                                    :to="{ name: 'show-types', params: { id: tipo.id } }">
+                                    {{ tipo.name }}
+                                </router-link>
+                                
                             </h2>
                             <button class="bottone " @click="selectType(tipo)"
                                 :class="(store.selectedTypeId == tipo.id) ? 'bottone-pieno' : (store.CPUTypeId == tipo.id) ? 'bottone-avversario ' : 'bottone-vuoto '">

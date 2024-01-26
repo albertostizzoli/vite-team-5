@@ -19,11 +19,11 @@
                                 <img :src="store.imgPath + item.image" @error="setDefaultImage" :alt="item.name">
                             </div>
                             <h2 class="fs-4 fw-bold">
-                                <!-- <router-link class="text-secondary text-decoration-none"
-                                    :to="{ name: 'items', params: { id: item.id } }">
+                                <router-link class="text-secondary text-decoration-none"
+                                    :to="{ name: 'show-item', params: { id: item.id } }">
                                     {{ item.name }}
-                                </router-link> -->
-                                {{ item.name }}
+                                </router-link>
+                                <!-- {{ item.name }} -->
                             </h2>
                             <button class="bottone " @click="selectItem(item)"
         :class="(store.selectedItemId == item.id) ? 'bottone-pieno ' : (store.CPUItemId == item.id) ? ' bottone-avversario ' : ' bottone-vuoto '">{{ (store.selectedItemId
