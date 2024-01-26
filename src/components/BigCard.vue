@@ -90,9 +90,9 @@
                         </button>
                     </div>
                     <!-- endtemplate -->
-                </div>
-                <a class="btn mt-2 btn-lg" href="#!" :class="(store.selectedCharacterId && store.selectedItemId && store.selectedTypeId) ? 'btn-success' : 'btn-primary'">Pulsante che avvia la partita</a>
-            </div>
+                  </div>
+                  <!-- <a class="btn mt-2 btn-lg" href="#!" :class="(store.selectedCharacterId && store.selectedItemId && store.selectedTypeId) ? 'btn-success' : 'btn-primary'">Pulsante che avvia la partita</a> -->
+                </div> 
             </div>
         </div>
     </header>
