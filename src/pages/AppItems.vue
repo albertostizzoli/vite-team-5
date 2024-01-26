@@ -1,7 +1,6 @@
 <template>
     <section class="pt-4">
         <div class="container px-lg-5">
-            <PopuP />
             <h2 class="mb-5">Choose an Items</h2>
             <!-- PAGINATION -->
             <div class="d-flex justify-content-between mb-5">
@@ -13,6 +12,8 @@
             <!-- END PAGINATION -->
             <div class="row gx-lg-5">
                 <div class="col-lg-6 col-xxl-4 mb-5" v-for="item in   store.items  " :key="item.id">
+                    <PopuP id="pop-up" class="pb-5 position-absolute bottom-50 "
+                        :isActive="store.selectedItemId === item.id" />
                     <div class="card bg-light border-0 h-100">
                         <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
                             <div class="box-image-items  feature bg-primary bg-gradient text-white rounded-4 mb-4 mt-n4">
@@ -26,8 +27,9 @@
                                 <!-- {{ item.name }} -->
                             </h2>
                             <button class="bottone " @click="selectItem(item)"
-        :class="(store.selectedItemId == item.id) ? 'bottone-pieno ' : (store.CPUItemId == item.id) ? ' bottone-avversario ' : ' bottone-vuoto '">{{ (store.selectedItemId
-                                    == item.id) ? 'Selezionato' : 'Seleziona' }}</button>
+                                :class="(store.selectedItemId == item.id) ? 'bottone-pieno ' : (store.CPUItemId == item.id) ? ' bottone-avversario ' : ' bottone-vuoto '">{{
+                                    (store.selectedItemId
+                                        == item.id) ? 'Selezionato' : 'Seleziona' }}</button>
 
                             <p class="mb-0">{{ item.description }}</p>
                         </div>
