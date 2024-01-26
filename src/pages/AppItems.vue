@@ -26,9 +26,9 @@
                                 {{ item.name }}
                             </h2>
                             <button class="bottone " @click="selectItem(item)"
-                                :class="(store.selectedItemId == item.id) ? 'bottone-pieno ' : (store.CPUItemId == item.id) ? ' bottone-avversario ' : ' bottone-vuoto '">{{
-                                    (store.selectedItemId
-                                        == item.id) ? 'Selezionato' : 'Seleziona' }}</button>
+        :class="(store.selectedItemId == item.id) ? 'bottone-pieno ' : (store.CPUItemId == item.id) ? ' bottone-avversario ' : ' bottone-vuoto '">{{ (store.selectedItemId
+                                    == item.id) ? 'Selezionato' : 'Seleziona' }}</button>
+
                             <p class="mb-0">{{ item.description }}</p>
                         </div>
                     </div>
@@ -60,12 +60,11 @@ export default {
                 })
                 .then((res) => {
                     this.store.items = res.data.results.data;
-                    console.log(`items`, res.data);
-                    console.log(this.store.items);
                     this.currentPage = res.data.results.current_page;
                     this.lastPage = res.data.results.last_page;
                 });
         },
+
         selectItem(item) {
             if (store.selectedItemId === item.id) {
                 store.selectedItemId = "";
@@ -74,13 +73,15 @@ export default {
             }
             this.store.selectedItem = item;
             this.store.selectedItemId = item.id;
-            console.log('non cambia', this.store.selectedItemId);
+
+
             this.cpuSelection();
         },
         cpuSelection() {
-            this.store.CPUItemId = false;
+            this.store.CPUItemId = false
             while (!this.store.CPUItemId || this.store.CPUItemId === this.store.selectedItemId && this.store.items.length === 1) {
-                this.store.CPUItemId = Math.floor(Math.random() * (this.store.items.length)) + ((this.currentPage - 1) * 9) + 1;
+                this.store.CPUItemId = Math.floor(Math.random() * (this.store.items.length)) + ((this.currentPage - 1) * 9) + 1
+
             }
             //console.log('id',this.store.CPUItemId  )
             this.store.CPUItem = this.store.items[this.store.CPUItemId - ((this.currentPage - 1) * 9) - 1];
