@@ -140,6 +140,7 @@ h5 {
 
 //button restart
 .one-div {
+    max-height: 70px;
     position: relative;
     margin-top: 10px;
     height: 70px;
