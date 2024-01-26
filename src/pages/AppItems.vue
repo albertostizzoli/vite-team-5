@@ -15,8 +15,7 @@
                     <div class="card bg-light border-0 h-100">
                         <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
                             <div class="box-image-items  feature bg-primary bg-gradient text-white rounded-4 mb-4 mt-n4">
-                                <img :src="item.image ? (store.imgPath + item.image) : '../public/images/default-item.png'"
-                                    :alt="item.name">
+                                <img :src="store.imgPath + item.image" @error="setDefaultImage" :alt="item.name">
                             </div>
                             <h2 class="fs-4 fw-bold">
                                 <!-- <router-link class="text-secondary text-decoration-none"
@@ -102,6 +101,9 @@ export default {
                 this.getAllItems();
             }
         },
+        setDefaultImage(event) {
+            event.target.src = '../public/images/default-item.png';
+        }
     },
     mounted() {
         this.getAllItems();
