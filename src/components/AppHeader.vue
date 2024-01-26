@@ -15,13 +15,16 @@
             </div>
         </div>
     </nav>
+    <!-- <div v-if="store.selectedCharacterId">Test</div> -->
 </template>
 
 <script>
+/* import { store} from '../../store.js'; */
 export default {
     name: "AppHeader",
     data() {
         return {
+            // store,
             menu: [
                 {
                     label: "Home",
@@ -46,3 +49,6 @@ export default {
 </script>
 
 <style lang="scss" scoped></style>
+
+
+
