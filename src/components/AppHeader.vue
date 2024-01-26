@@ -10,8 +10,9 @@
                 <!-- UL ARENA -->
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0"
                     v-if="store.selectedCharacterId && store.selectedItemId && store.selectedTypeId">
-                    <li class="nav-item text-white mt-2 mx-5"><a class="" @click="noArena">Combatterò dopo</a></li>
-                    <li class="nav-item text-white">
+                    <li class="nav-item text-white mt-2 mx-5" @click="noArena">
+                        Combatterò dopo</li>
+                    <li class="nav-item text-white" @click="goArena">
                         <router-link :to="{ name: 'home' }" class="nav-link" active-class="active">
                             Arena</router-link>
                     </li>
@@ -47,6 +48,9 @@
                     </div>
                 </div>
             </section>
+            <!-- RESTART CHOOSE BUTTON -->
+            <button @click="noArena">Restart</button>
+            <!--  -->
             <section v-if="store.selectedCharacter.name || store.selectedItem.name || store.selectedType.name"
                 class="bg-warning w-50">
                 <div class="container d-flex justify-content-between ">
@@ -66,6 +70,7 @@
                     </div>
                 </div>
             </section>
+
         </div>
     </Transition>
 </template>
@@ -102,8 +107,16 @@ export default {
             this.store.selectedCharacterId = null;
             this.store.selectedItemId = null;
             this.store.selectedTypeId = null;
+            this.store.selectedCharacter = {};
+            this.store.selectedItem = {};
+            this.store.selectedType = {};
+            this.store.showStartButton = false;
+        },
+        goArena() {
+            this.store.showStartButton = true;
         }
     },
+
 }
 </script>
 
