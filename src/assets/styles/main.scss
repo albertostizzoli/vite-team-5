@@ -10,7 +10,9 @@ $fa-font-path: '../webfonts';
 @import 'bootstrap/scss/bootstrap';
 
 
-
+body{
+  background-color: #070302;
+}
 //bottone
 
 .bottone {
@@ -73,6 +75,9 @@ $fa-font-path: '../webfonts';
   }
 }
 
+.cp{
+  cursor: pointer;
+}
 
 
 

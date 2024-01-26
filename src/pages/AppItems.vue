@@ -1,6 +1,7 @@
 <template>
     <section class="pt-4">
         <div class="container px-lg-5">
+            <PopuP />
             <h2 class="mb-5">Choose an Items</h2>
             <!-- PAGINATION -->
             <div class="d-flex justify-content-between mb-5">
@@ -38,6 +39,7 @@
 </template>
 
 <script>
+import PopuP from "@/components/PopuP.vue";
 import { store } from "../store.js";
 import axios from "axios";
 
@@ -64,33 +66,31 @@ export default {
                     this.lastPage = res.data.results.last_page;
                 });
         },
-
         selectItem(item) {
             if (store.selectedItemId === item.id) {
                 store.selectedItemId = "";
                 store.selectedItem = {};
-                return
+                return;
             }
             this.store.selectedItem = item;
             this.store.selectedItemId = item.id;
-
             console.log('non cambia', this.store.selectedItemId);
             this.cpuSelection();
         },
         cpuSelection() {
-            this.store.CPUItemId = false
+            this.store.CPUItemId = false;
             while (!this.store.CPUItemId || this.store.CPUItemId === this.store.selectedItemId && this.store.items.length === 1) {
-                this.store.CPUItemId = Math.floor(Math.random() * (this.store.items.length)) + ((this.currentPage - 1) * 9) + 1
+                this.store.CPUItemId = Math.floor(Math.random() * (this.store.items.length)) + ((this.currentPage - 1) * 9) + 1;
             }
             //console.log('id',this.store.CPUItemId  )
             this.store.CPUItem = this.store.items[this.store.CPUItemId - ((this.currentPage - 1) * 9) - 1];
             //console.log('obj',this.store.selectedItem )
-
         },
         nextPage() {
             if (this.currentPage < this.lastPage) {
                 this.currentPage = this.currentPage + 1;
-            } else {
+            }
+            else {
                 this.currentPage = 1;
             }
             this.getAllItems();
@@ -108,6 +108,7 @@ export default {
     mounted() {
         this.getAllItems();
     },
+    components: { PopuP }
 };
 </script>
 

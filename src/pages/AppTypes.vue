@@ -1,6 +1,7 @@
 <template>
     <section class="pt-4 ">
         <div class="container px-lg-5">
+            <PopuP />
             <h2 class="mb-5">Choose a Type</h2>
             <div class="row gx-lg-5">
                 <div class="col-lg-6 col-xxl-4 mb-5" v-for=" tipo in store.types" :key="tipo.id">
@@ -30,56 +31,50 @@
 <script>
 import axios from 'axios';
 import { store } from '../store.js';
+import PopuP from '@/components/PopuP.vue';
 export default {
-
     name: "AppTypes",
     data() {
         return {
             store,
-        }
+        };
     },
     methods: {
         getAllTypes() {
             axios.get(this.store.apiUrl + "/types").then((res) => {
                 this.store.types = res.data.results;
                 console.log(`types`, this.store.types);
-            })
+            });
         },
         selectType(type) {
             if (store.selectedTypeId === type.id) {
                 store.selectedTypeId = "";
                 store.selectedType = {};
-                return
+                return;
             }
             this.store.selectedType = type;
             this.store.selectedTypeId = type.id;
             console.log(this.store.selectedType);
-
             console.log('non cambia', this.store.selectedTypeId);
             this.cpuSelection();
         },
         cpuSelection() {
             console.log('Before CPU Selection:', this.store.CPUTypeId, this.store.selectedTypeId);
-
             this.store.CPUTypeId = false;
             while (!this.store.CPUTypeId || this.store.CPUTypeId == this.store.selectedTypeId) {
                 this.store.CPUTypeId = Math.floor(Math.random() * (this.store.types.length)) + 1;
-
                 this.store.CPUTypeId = parseInt(this.store.CPUTypeId);
                 this.store.selectedTypeId = parseInt(this.store.selectedTypeId);
-
             }
-
             console.log('After CPU Selection:', this.store.CPUTypeId, this.store.selectedTypeId);
-
             this.store.CPUType = this.store.types[this.store.CPUTypeId - 1];
             console.log('CPUType Object:', this.store.CPUType);
         }
-
     },
     mounted() {
-        this.getAllTypes()
-    }
+        this.getAllTypes();
+    },
+    components: { PopuP }
 }
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-    <section class="position-relative">
+    <section class="position-relative bg-white">
         <AppHeader />
         <!-- BUTTON START GAME -->
         <div v-if="store.showStartButton" class="mt-5 container d-flex flex-column justify-content-center ">
@@ -14,6 +14,7 @@
         <!--  -->
         <router-view class="router"></router-view>
     </section>
+    <FooterComponent />
 </template>
 
 <script>
@@ -25,7 +26,7 @@ export default {
     name: 'App',
     components: {
         AppHeader,
-        FooterComponent
+        FooterComponent,
     },
     data() {
         return {
