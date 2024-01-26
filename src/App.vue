@@ -1,15 +1,24 @@
 <template>
-    <section class="position-relative">
-        <div>
-            <a @click="playResult" class="btn mt-2 btn-lg" href="#!" :class="(store.selectedCharacterId && store.selectedItemId && store.selectedTypeId) ? 'btn-success' : 'btn-primary'">Pulsante che avvia la partita</a>
 
-            <div id="risultatoGiocatore">Risultato Giocatore: {{ risultatoGiocatore }}</div>
-            <div id="risultatoComputer">Risultato Computer: {{ risultatoPC }}</div>
-            <div id="vincitore">Vincitore: {{ vincitore }}</div>
-        </div>
+
+    <section class="position-relative bg-white">
         <AppHeader />
+        <!-- BUTTON START GAME -->
+        <div v-if="store.showStartButton" class="mt-5 container d-flex flex-column justify-content-center ">
+            <a @click="playResult" class="btn mt-2 btn-lg" href="#!"
+                :class="(store.selectedCharacterId && store.selectedItemId && store.selectedTypeId) ? 'btn-success' : 'btn-primary'">
+                Start A Game</a>
+
+           <div class="btn btn-warning" id="vincitore">Vincitore: {{ vincitore }}</div>
+            <div class="btn btn-danger" id="vincitore">Vincitore: {{ vincitore == 'PC' ? store.CPUCharacter.name :
+                store.selectedCharacter.name }}
+            </div>
+ 
+        </div>
+        <!--  -->
         <router-view class="router"></router-view>
     </section>
+    <FooterComponent />
 </template>
 
 <script>
@@ -21,40 +30,89 @@ export default {
     name: 'App',
     components: {
         AppHeader,
-        FooterComponent
+        FooterComponent,
     },
     data() {
         return {
             store,
-            risultatoGiocatore: 0,
-            risultatoPC: 0,
-            vincitore: ''
+            lifeTotaleGiocatore: '',
+            lifeTotalePC: '',
+            vincitore: '',
+            //turno: ''
         }
     },
     methods: {
-    playResult() {
-        if (this.store.selectedCharacterId && this.store.selectedItemId && this.store.selectedTypeId) {
-            do {
-                this.risultatoGiocatore = this.startFight();
-                this.risultatoPC = this.startFight();
-            } while (this.risultatoGiocatore === this.risultatoPC); // Continua fino a quando i punteggi non sono diversi
 
-            this.vincitore = this.determinaVincitore(this.risultatoGiocatore, this.risultatoPC);
-        }
-    },
 
-    startFight() {
-        return Math.floor(Math.random() * 6) + 1;
-    },
+        calculateDamage(attack, defence) {
+            console.log('attack: ', attack, ' defence: ', defence)
 
-    determinaVincitore(giocatore, pc) {
-        if (giocatore > pc) {
-            return 'Giocatore';
-        } else {
-            return 'PC';
-        }
+
+            return Math.max(attack - defence, 0);
+        },
+
+        calculateDodge(speed) {
+            console.log(speed)
+            console.log('dodge% :', speed * 0.4)
+
+            return speed * 0.4;
+
+        },
+
+        applyItemEffects(character, item) {
+            const modifiedCharacter = { ...character };
+            modifiedCharacter.attack += item.weight;
+            modifiedCharacter.speed -= item.weight * 2;
+            console.log(item.weight)
+            // modifiedCharacter.life *= 2;
+
+            return modifiedCharacter;
+        },
+
+        fightTurn(attacker, defender) {
+            let damage = this.calculateDamage(attacker.attack, defender.defence);
+            let dodgeChance = this.calculateDodge(defender.speed);
+
+            if (Math.random() * 100 < dodgeChance) {
+                damage = 0;
+            }
+
+            defender.life -= damage;
+            return defender.life <= 0;
+        },
+
+        playResult() {
+            if (this.store.selectedCharacterId && this.store.selectedItemId && this.store.selectedTypeId) {
+                const playerCharacter = this.applyItemEffects(this.store.selectedCharacter, this.store.selectedItem);
+                const cpuCharacter = this.applyItemEffects(this.store.CPUCharacter, this.store.CPUItem);
+                console.log('play selected', playerCharacter)
+                console.log('play bot', cpuCharacter)
+
+                //let playerTurn = true;
+                let playerTurn = Math.round(Math.random());
+
+                while (playerCharacter.life > 0 && cpuCharacter.life > 0) {
+                    console.log('play selected life', playerCharacter.life)
+                    console.log('play bot life', cpuCharacter.life)
+
+                    if (playerTurn) {
+                        this.fightTurn(playerCharacter, cpuCharacter);
+                    } else {
+                        this.fightTurn(cpuCharacter, playerCharacter);
+                    }
+                    playerTurn = !playerTurn;
+
+                    console.log('play selected life after', playerCharacter.life)
+                    console.log('play bot life after', cpuCharacter.life)
+
+                }
+
+                this.vincitore = playerCharacter.life > 0 ? 'Giocatore' : 'PC';
+                console.log(this.vincitore)
+            }
+        },
     }
-}
+
 }
 </script>
 
@@ -63,54 +121,3 @@ export default {
     margin-bottom: 200px;
 }
 </style>
-
-
-//data() {
-//         return {
-//             store,
-            
-//         }
-//     },
-//     methods: {
-//       playResult(){
-//             if(this.store.selectedCharacterId && this.store.selectedItemId && this.store.selectedTypeId){
-                
-//                 let risultatoGiocatore = 0;
-//                 let risultatoComputer = 0;
-
-//                 while(risultatoGiocatore === risultatoComputer){
-//                     risultatoGiocatore = this.startFight();
-//                     risultatoComputer = this.startFight();
-//                 } 
-                
-//                 //let risultatoComputer= determinaVincitore(risultatoGiocatore, risultatoPC);                
-//                 this.$refs.risultatoComputer.innerHTML= 'risultato del computer' + ' ' + risultatoComputer;
-
-//                 //let risultatoGiocatore= determinaVincitore(risultatoGiocatore, risultatoPC);                
-//                 this.$refs.risultatoGiocatore.innerHTML= 'risultato del giocatore' + ' ' + risultatoGiocatore;
-
-//                 let vincitore = this.determinaVincitore(risultatoGiocatore, risultatoComputer);                
-//                 this.$refs.vincitore.innerHTML= 'vincitore'+ ' ' + vincitore;
-                
-//             }
-//         },
-        
-//         startFight() {
-//             //ritorna il risultato per un giocatore
-//             return Math.floor(Math.random() * 6) + 1;
-//         },
-
-//         determinaVincitore(giocatore, pc) {
-//          if (giocatore > pc) {
-//             return 'Giocatore';
-//         } else if (pc > giocatore) {
-//             return 'PC';
-//         } else if(pc === giocatore) {
-//             return 'Pareggio';
-            
-//         }
-//       }
-//     },
-//     mounted() {
-//     },
-// }
