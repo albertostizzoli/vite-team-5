@@ -1,10 +1,9 @@
 <template>
-    <section class="pt-4">
-        <div class="container px-lg-5">
-            <PopuP />
-            <h2 class="mb-5">Choose an Items</h2>
+    <section class="pt-4 page-bg">
+        <div class="container px-lg-5 p-3 rounded-3 bg-blur">
+            <h2 class="mb-5 text-white">Choose an Items</h2>
             <!-- PAGINATION -->
-            <div class="d-flex justify-content-between mb-5">
+            <div class="d-flex justify-content-between mb-5 text-white">
                 <button @click="previousPage" class="btn-next-prev"><span>Indietro</span></button>
                 <h5 class="mt-3">Current page: <span class="fw-bold">{{ currentPage }}</span> of <span class="fw-bold">{{
                     lastPage }}</span></h5>
@@ -13,6 +12,8 @@
             <!-- END PAGINATION -->
             <div class="row gx-lg-5">
                 <div class="col-lg-6 col-xxl-4 mb-5" v-for="item in   store.items  " :key="item.id">
+                    <PopuP id="pop-up" class="pb-5 position-absolute bottom-50 "
+                        :isActive="store.selectedItemId === item.id" />
                     <div class="card bg-light border-0 h-100">
                         <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
                             <div class="box-image-items  feature bg-primary bg-gradient text-white rounded-4 mb-4 mt-n4">
@@ -26,14 +27,23 @@
                                 <!-- {{ item.name }} -->
                             </h2>
                             <button class="bottone " @click="selectItem(item)"
-        :class="(store.selectedItemId == item.id) ? 'bottone-pieno ' : (store.CPUItemId == item.id) ? ' bottone-avversario ' : ' bottone-vuoto '">{{ (store.selectedItemId
-                                    == item.id) ? 'Selezionato' : 'Seleziona' }}</button>
+                                :class="(store.selectedItemId == item.id) ? 'bottone-pieno ' : (store.CPUItemId == item.id) ? ' bottone-avversario ' : ' bottone-vuoto '">{{
+                                    (store.selectedItemId
+                                        == item.id) ? 'Selezionato' : 'Seleziona' }}</button>
 
                             <p class="mb-0">{{ item.description }}</p>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- PAGINATION -->
+            <div class="d-flex justify-content-between mb-5 text-white">
+                <button @click="previousPage" class="btn-next-prev"><span>Indietro</span></button>
+                <h5 class="mt-3">Current page: <span class="fw-bold">{{ currentPage }}</span> of <span class="fw-bold">{{
+                    lastPage }}</span></h5>
+                <button @click="nextPage" class="btn-next-prev">Avanti</button>
+            </div>
+            <!-- END PAGINATION -->
         </div>
     </section>
 </template>

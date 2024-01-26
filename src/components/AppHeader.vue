@@ -29,9 +29,9 @@
     </nav>
     <!-- SELECTED CHARACTERS -->
     <Transition name="fade">
-        <div class="d-flex" v-if="store.selectedCharacterId || store.selectedItemId || store.selectedTypeId">
-            <section id="bottom-bar" class="bg-primary w-50">
-                <div class="container d-flex justify-content-between ">
+        <div class="d-flex page-bg" v-if="store.selectedCharacterId || store.selectedItemId || store.selectedTypeId">
+            <section id="bottom-bar" class="bg-blur border-0 w-50">
+                <div class="container text-primary px-4 mt-3 d-flex justify-content-between ">
                     <div class="d-flex gx-5 x">
                         <div>
                             <h6>Il tuo eroe</h6>
@@ -49,11 +49,14 @@
                 </div>
             </section>
             <!-- RESTART CHOOSE BUTTON -->
-            <button @click="noArena">Restart</button>
+            <div @click="noArena" class="one-div">
+                <div class="text text-black">Restart</div>
+            </div>
+
             <!--  -->
             <section v-if="store.selectedCharacter.name || store.selectedItem.name || store.selectedType.name"
-                class="bg-warning w-50">
-                <div class="container d-flex justify-content-between ">
+                class="bg-blur border-0 w-50">
+                <div class="container  text-danger px-4 mt-3 d-flex justify-content-between ">
                     <div class="d-flex gx-5 x">
                         <div>
                             <h6>Eroe avversario</h6>
@@ -133,6 +136,40 @@ export default {
 
 h5 {
     transition: 2s;
+}
+
+//button restart
+.one-div {
+    position: relative;
+    margin-top: 10px;
+    height: 70px;
+    width: 60px;
+    background-color: rgb(15, 15, 15);
+    transform-style: preserve-3d;
+    animation: rot 2s infinite ease;
+    border-radius: 20px;
+    box-shadow: 0 0 50px 0px, inset 0 0 90px 0px;
+    color: white;
+    transition: 1s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+@keyframes rot {
+    0% {
+        transform: rotateX(-15deg) translateY(0px);
+    }
+
+    50% {
+        transform: rotateX(-15deg) translateY(-10px);
+    }
+
+    100% {
+        transform: rotateX(-15deg) translateY(0px);
+    }
 }
 </style>
 

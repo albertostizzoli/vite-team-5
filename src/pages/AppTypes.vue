@@ -1,8 +1,8 @@
 <template>
-    <section class="pt-4 ">
-        <div class="container px-lg-5">
+    <section class="pt-4 page-bg">
+        <div class="container px-lg-5 p-3 rounded-3 bg-blur">
             <PopuP />
-            <h2 class="mb-5">Choose a Type</h2>
+            <h2 class="mb-5 text-white">Choose a Type</h2>
             <div class="row gx-lg-5">
                 <div class="col-lg-6 col-xxl-4 mb-5" v-for=" tipo in store.types" :key="tipo.id">
                     <div class="card bg-light border-0 h-100">
@@ -16,7 +16,7 @@
                                     :to="{ name: 'show-types', params: { id: tipo.id } }">
                                     {{ tipo.name }}
                                 </router-link>
-                                
+
                             </h2>
                             <button class="bottone " @click="selectType(tipo)"
                                 :class="(store.selectedTypeId == tipo.id) ? 'bottone-pieno' : (store.CPUTypeId == tipo.id) ? 'bottone-avversario ' : 'bottone-vuoto '">
@@ -50,7 +50,7 @@ export default {
 
             })
 
-               
+
         },
         selectType(type) {
             if (store.selectedTypeId === type.id) {

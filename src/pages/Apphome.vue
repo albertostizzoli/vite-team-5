@@ -1,9 +1,7 @@
 <template>
     <section class="home-section">
         <BigCard /> <!-- SEZIONE BIG-CARD -->
-        <section class="container">
 
-        </section>
     </section>
 </template>
 
