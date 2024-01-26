@@ -1,9 +1,9 @@
 <template>
-    <section class="pt-4">
-        <div class="container px-lg-5">
-            <h2 class="mb-5">Choose an Items</h2>
+    <section class="pt-4 page-bg">
+        <div class="container px-lg-5 p-3 rounded-3 bg-blur">
+            <h2 class="mb-5 text-white">Choose an Items</h2>
             <!-- PAGINATION -->
-            <div class="d-flex justify-content-between mb-5">
+            <div class="d-flex justify-content-between mb-5 text-white">
                 <button @click="previousPage" class="btn-next-prev"><span>Indietro</span></button>
                 <h5 class="mt-3">Current page: <span class="fw-bold">{{ currentPage }}</span> of <span class="fw-bold">{{
                     lastPage }}</span></h5>
@@ -36,6 +36,14 @@
                     </div>
                 </div>
             </div>
+            <!-- PAGINATION -->
+            <div class="d-flex justify-content-between mb-5 text-white">
+                <button @click="previousPage" class="btn-next-prev"><span>Indietro</span></button>
+                <h5 class="mt-3">Current page: <span class="fw-bold">{{ currentPage }}</span> of <span class="fw-bold">{{
+                    lastPage }}</span></h5>
+                <button @click="nextPage" class="btn-next-prev">Avanti</button>
+            </div>
+            <!-- END PAGINATION -->
         </div>
     </section>
 </template>

@@ -1,10 +1,20 @@
 <template>
   <header class="py-5">
     <div class="container px-lg-5">
-      <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
+      <div id="bg-op" class="p-4 p-lg-5  rounded-3 text-center">
         <div class="m-4 m-lg-5">
-          <h1 class="display-5 fw-bold">Qui possiamo mettere il gioco</h1>
-          <p class="fs-4">Descrizione di come funziona il gioco</p>
+          <h1 class="display-5 fw-bold text-white">Squiddy Game</h1>
+          <div v-if="store.selectedCharacterId && store.selectedItemId && store.selectedTypeId" class="fs-4 text-white">
+            <p>Hai fatto la tua scelta!</p>
+            <div>
+              <router-link :to="{ name: 'arena' }"> <button class="btn"><i class="animation"></i>
+
+                  Inizia la battaglia!
+                  <i class="animation"></i>
+                </button> </router-link>
+            </div>
+          </div>
+          <p v-else class="fs-4 text-white">Per giocare seleziona un eroe, un'arma e una categoria!</p>
           <div class="w-100 bg-transparent  d-flex flex-row justify-content-between align-items-center p-2 my-0 "
             style="height: 700px;">
             <!-- template card -->
@@ -131,6 +141,10 @@ export default {
   background-color: yellow !important;
 }
 
+#bg-op {
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.521);
+}
 
 // template card css
 
@@ -278,4 +292,44 @@ export default {
 }
 
 // end template card css
+//BTN START
+.btn {
+  outline: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #40B3A2;
+  min-width: 200px;
+  border: 0;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .1);
+  box-sizing: border-box;
+  padding: 16px 20px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.btn:hover {
+  opacity: .95;
+}
+
+.btn .animation {
+  border-radius: 100%;
+  animation: ripple 0.6s linear infinite;
+}
+
+@keyframes ripple {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.1), 0 0 0 20px rgba(255, 255, 255, 0.1), 0 0 0 40px rgba(255, 255, 255, 0.1), 0 0 0 60px rgba(255, 255, 255, 0.1);
+  }
+
+  100% {
+    box-shadow: 0 0 0 20px rgba(255, 255, 255, 0.1), 0 0 0 40px rgba(255, 255, 255, 0.1), 0 0 0 60px rgba(255, 255, 255, 0.1), 0 0 0 80px rgba(255, 255, 255, 0);
+  }
+}
 </style>
