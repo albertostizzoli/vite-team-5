@@ -23,7 +23,8 @@
                                 </router-link>
                             </h2>
                             <button class="bottone " @click="selectCharacter(character)"
-                                :class="(store.selectedCharacterId == character.id) ? 'bottone-pieno ' :  (store.CPUCharacterId == character.id) ? 'bottone-avversario ' : 'bottone-vuoto '">{{(store.selectedCharacterId == character.id ) ?'Selezionato' : 'Seleziona'}}
+                                :class="(store.selectedCharacterId == character.id) ? 'bottone-pieno ' : (store.CPUCharacterId == character.id) ? 'bottone-avversario ' : 'bottone-vuoto '">{{ (store.selectedCharacterId
+                                    == character.id) ? 'Selezionato' : 'Seleziona' }}
 
                             </button>
                             <p class="mb-0">{{ character.description }}</p>
@@ -61,9 +62,7 @@ export default {
         getAllCharacters() {
             axios.get(this.store.apiUrl + "/characters", { params: { page: this.currentPage } }).then((res) => {
                 this.store.characters = res.data.results.data;
-                
-                console.log(`res data`, res.data.results);
-                console.log(this.store.characters);
+
                 /*  CURRENT E LAST PAGE */
                 this.currentPage = res.data.results.current_page;
                 this.lastPage = res.data.results.last_page;
@@ -71,26 +70,23 @@ export default {
         },
 
         selectCharacter(character) {
-            if(store.selectedCharacterId === character.id){
+            if (store.selectedCharacterId === character.id) {
                 store.selectedCharacterId = "";
                 store.selectedCharacter = {};
                 return
             }
             this.store.selectedCharacter = character;
             this.store.selectedCharacterId = character.id;
-            console.log(this.store.selectedCharacter);
 
             //richiamiamo scelta computer
             this.cpuSelection();
         },
-        cpuSelection(){
-            this.store.CPUCharacterId= false
+        cpuSelection() {
+            this.store.CPUCharacterId = false
             while (!this.store.CPUCharacterId || this.store.CPUCharacterId === this.store.selectedCharacterId && this.store.characters.length === 1) {
-                this.store.CPUCharacterId = Math.floor(Math.random() * (this.store.characters.length)) + ((this.currentPage - 1)*9) +1
+                this.store.CPUCharacterId = Math.floor(Math.random() * (this.store.characters.length)) + ((this.currentPage - 1) * 9) + 1
             }
-            console.log('id',this.store.CPUCharacterId )
-            this.store.CPUCharacter = this.store.characters[this.store.CPUCharacterId - ((this.currentPage - 1)*9) -1];
-            console.log('obj',this.store.CPUCharacter )
+            this.store.CPUCharacter = this.store.characters[this.store.CPUCharacterId - ((this.currentPage - 1) * 9) - 1];
 
         },
         nextPage() {
@@ -117,6 +113,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

@@ -12,8 +12,8 @@
                                 {{ tipo.name }}
                             </h2>
                             <button class="bottone " @click="selectType(tipo)"
-                                :class="(store.selectedTypeId == tipo.id) ? 'bottone-pieno' :  (store.CPUTypeId == tipo.id) ? 'bottone-avversario ' : 'bottone-vuoto '">
-                                {{(store.selectedTypeId == tipo.id) ?'Selezionato' : 'Seleziona' }}
+                                :class="(store.selectedTypeId == tipo.id) ? 'bottone-pieno' : (store.CPUTypeId == tipo.id) ? 'bottone-avversario ' : 'bottone-vuoto '">
+                                {{ (store.selectedTypeId == tipo.id) ? 'Selezionato' : 'Seleziona' }}
                             </button>
                             <p class="mb-0">{{ tipo.description }}</p>
                         </div>
@@ -40,38 +40,32 @@ export default {
         getAllTypes() {
             axios.get(this.store.apiUrl + "/types").then((res) => {
                 this.store.types = res.data.results;
-                console.log(`types`, this.store.types);
             })
         },
         selectType(type) {
-            if(store.selectedTypeId === type.id){
+            if (store.selectedTypeId === type.id) {
                 store.selectedTypeId = "";
                 store.selectedType = {};
                 return
             }
             this.store.selectedType = type;
             this.store.selectedTypeId = type.id;
-            console.log(this.store.selectedType);
 
-            console.log('non cambia',this.store.selectedTypeId);
             this.cpuSelection();
         },
         cpuSelection() {
-            console.log('Before CPU Selection:', this.store.CPUTypeId, this.store.selectedTypeId);
 
             this.store.CPUTypeId = false;
-            while (!this.store.CPUTypeId || this.store.CPUTypeId == this.store.selectedTypeId ) {
+            while (!this.store.CPUTypeId || this.store.CPUTypeId == this.store.selectedTypeId) {
                 this.store.CPUTypeId = Math.floor(Math.random() * (this.store.types.length)) + 1;
-                
+
                 this.store.CPUTypeId = parseInt(this.store.CPUTypeId);
                 this.store.selectedTypeId = parseInt(this.store.selectedTypeId);
 
             }
 
-            console.log('After CPU Selection:', this.store.CPUTypeId, this.store.selectedTypeId);
 
             this.store.CPUType = this.store.types[this.store.CPUTypeId - 1];
-            console.log('CPUType Object:', this.store.CPUType);
         }
 
     },
@@ -82,3 +76,5 @@ export default {
 </script>
 
 <style lang="scss" scoped></style>
+
+
