@@ -113,8 +113,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.router {
-    margin-bottom: 200px;
-}
-</style>
+<style lang="scss" scoped></style>
