@@ -13,7 +13,8 @@
                     <li class="nav-item text-white mx-5 cp d-flex flex-column justify-content-center " @click="noArena">
                         <div>Combatterò dopo</div>
                     </li>
-                    <li class="nav-item text-white shake btn-arena" @click="goArena">
+                    <li v-if="showArenaButton" class="nav-item text-white shake btn-arena"
+                        @click="goArena, showArenaButton = false">
                         <router-link :to="{ name: 'home' }" class="nav-link text-white" active-class="active">
                             Arena</router-link>
                     </li>
@@ -36,7 +37,7 @@
         </div>
     </nav>
     <!-- SELECTED CHARACTERS -->
-    <Transition name="fade">
+    <Transition name="fade" v-if="showArenaButton">
         <div class="d-flex page-bg" v-if="store.selectedCharacterId || store.selectedItemId || store.selectedTypeId">
             <section id="bottom-bar" class="bg-blur border-0 w-50">
                 <div class="container text-primary px-4 mt-3 d-flex justify-content-between ">
@@ -57,7 +58,7 @@
                 </div>
             </section>
             <!-- RESTART CHOOSE BUTTON -->
-            <div @click="noArena" class="one-div">
+            <div @click="noArena" class="one-div cp">
                 <div class="text text-black">Restart</div>
             </div>
 
@@ -93,6 +94,7 @@ export default {
     data() {
         return {
             store,
+            showArenaButton: true,
             menu: [
                 {
                     label: "Home",
@@ -122,6 +124,15 @@ export default {
             this.store.selectedItem = {};
             this.store.selectedType = {};
             this.store.showStartButton = false;
+            this.store.CPUCharacter = {};
+            this.store.CPUItem = {};
+            this.store.CPUType = {};
+            this.store.CPUCharacterId = null;
+            this.store.CPUItemId = null;
+            this.store.CPUTypeId = null;
+            this.store.closePopUp = true;
+            this.showArenaButton = true;
+
         },
         goArena() {
             this.store.showStartButton = true;
