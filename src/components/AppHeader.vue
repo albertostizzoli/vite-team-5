@@ -23,6 +23,13 @@
                         <router-link :to="{ name: item.name }" class="nav-link" active-class="active">
                             {{ item.label }}</router-link>
                     </li>
+
+
+                    <!-- PAGINA DI PROVA -->
+                    <li class="nav-item">
+                        <router-link :to="{ name: 'testcard' }" class="nav-link" active-class="active">
+                            Pagina test card</router-link>
+                    </li>
                 </ul>
             </div>
         </div>

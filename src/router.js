@@ -10,6 +10,8 @@ import ShowType from "./pages/ShowType.vue";
 import NotFound from "./pages/NotFound.vue";
 import BattleArena from "./pages/BattleArena.vue";
 
+import PaginaTestCard from "./pages/PaginaTestCard.vue"
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -52,6 +54,11 @@ const router = createRouter({
       path: "/arena",
       name: "arena",
       component: BattleArena,
+    },
+    {
+      path: "/testcard",
+      name: "testcard",
+      component: PaginaTestCard,
     },
     {
       path: "/:pathMatch(.*)*",
