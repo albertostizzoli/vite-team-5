@@ -20,5 +20,6 @@ export const store = reactive({
   CPUItemId: "",
   CPUTypeId: "",
   showStartButton: false,
+  closePopUp: true,
 
 });

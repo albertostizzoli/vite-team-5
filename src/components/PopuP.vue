@@ -1,10 +1,10 @@
 <template>
     <section v-if="isActive">
-        <div v-show="closePopUp" class="code-editor floating"
+        <div v-show="store.closePopUp" class="code-editor floating"
             v-if="store.selectedCharacterId || store.selectedItemId || store.selectedTypeId">
             <div class="header">
                 <span class="title ">Ottima Scelta!</span>
-                <svg @click="closePopUp = false" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                <svg @click="store.closePopUp = false" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                     class="icon">
                     <g stroke-width="0" id="SVGRepo_bgCarrier"></g>
                     <g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g>
@@ -51,7 +51,7 @@ export default {
     data() {
         return {
             store,
-            closePopUp: true,
+
         }
     },
 }

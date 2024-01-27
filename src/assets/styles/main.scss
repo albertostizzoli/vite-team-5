@@ -31,8 +31,8 @@ body{
 }
 
 .bg-blur{
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.521);
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.521) !important;
 }
 //bottone
 
@@ -88,7 +88,6 @@ body{
 
 .box-image {
   overflow: hidden;
-
   img {
       width: 100%;
       height: 100%;

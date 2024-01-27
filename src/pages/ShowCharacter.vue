@@ -1,24 +1,26 @@
 <template>
-    <div class="container p-5">
-        <div v-if="character">
-            <div class="mb-5">
-                <h1 class="display-3  text-center">{{ character.name }}</h1>
-            </div>
-            <div class="mb-3">
-            </div>
-            <div class="mb-5 w-100 d-flex flex-row justify-content-between ">
-                <div class="card overflow-hidden my-shadow "><img :src="store.imgPath + character.image" alt=""></div>
-                <p class="fs-3 text-center">{{ character.description }}</p>
-            </div>
-            <div class="mb-3 w-100 d-flex flex-row justify-content-between ">
-                <div v-for="param in parameters" class=" form-label bg-warning card p-1">
-                    {{ param }}: 
-                    {{ character[param] }}
+    <section class="page-bg vh-100 py-5">
+        <div class="container p-5 bg-blur">
+            <div v-if="character">
+                <div class="mb-5">
+                    <h1 class="display-3  text-white text-center">{{ character.name }}</h1>
                 </div>
+                <div class="mb-3">
+                </div>
+                <div class="mb-5 w-100 d-flex flex-row justify-content-between ">
+                    <div class="card overflow-hidden my-shadow "><img :src="store.imgPath + character.image" alt=""></div>
+                    <p class="fs-3 text-center text-white">{{ character.description }}</p>
+                </div>
+                <div class="mb-3 w-100 d-flex flex-row justify-content-between ">
+                    <div v-for="param in parameters" class=" form-label bg-warning card p-1">
+                        {{ param }}:
+                        {{ character[param] }}
+                    </div>
+                </div>
+                <div class="mb-3 d-flex "></div>
             </div>
-            <div class="mb-3 d-flex "></div>
         </div>
-    </div>
+    </section>
 </template>
 
 <script>
@@ -35,7 +37,6 @@ export default {
                 'defence',
                 'speed',
                 'life',
-                'type_id'
             ]
         }
     },
