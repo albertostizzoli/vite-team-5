@@ -4,8 +4,11 @@
             <div class="card-container">
                 <div class=" me-2">
                     <div class="my-card">
-                        <img src="http://localhost:8000/storage/images/characters/image1x1.png" alt="Character name"
-                            class="card-img">
+                        <div>
+                            <img src="http://localhost:8000/storage/images/characters/image1x1.png" alt="Character name"
+                                class="card-img">
+                        </div>
+
                         <div class="my-card-content">
                             <div class="inner-cont">
                                 <h4 class=" text-center">Gideon</h4>
@@ -20,7 +23,7 @@
 
                         </div>
                         <div class="health-bar">
-                            <div class="bar"></div>
+                            <div class="bar" :data-total="store.totalPlayerHp" :data-value="store.playerHp"></div>
                         </div>
                     </div>
                 </div>
@@ -42,6 +45,15 @@ export default {
     data() {
         return {
             store,
+
+        }
+    },
+    methods: {
+
+    },
+    computed: {
+        healthBarLen() {
+            return Math.floor((Math.max(this.store.playerHp, 0) / this.store.totalPlayerHp) * 100);
         }
     }
 }
@@ -52,18 +64,22 @@ export default {
     padding: 10px;
     width: 270px;
 
+    i {
+        color: red;
+    }
 
     .my-card {
         width: 250px;
         background-color: rgb(32, 12, 7);
-        box-shadow: 0 0 6px 3px rgba(0, 128, 0, 0.628);
+        border-radius: 25px;
+        background: #f5f5f5;
+        box-shadow: 25px 25px 50px #d0d0d0,
+            -25px -25px 50px #ffffff;
+        overflow: hidden;
+
 
         img {
             width: 100%;
-        }
-
-        .card-img {
-            border-radius: 5px 5px 0 0;
         }
 
         h4 {
@@ -119,13 +135,18 @@ export default {
 
 .my-effects {
     transition: transform 0.3s ease;
+    background-color: transparent;
 
     &:hover {
         transform: rotate(5deg) translateX(150px);
     }
 }
 
+template {
+    background-color: transparent;
+}
+
 .wrapper {
-    margin-top: 200px;
+    background-color: transparent;
 }
 </style>

@@ -7,19 +7,21 @@
             <div class="card-container">
                 <div class=" me-2">
                     <div class="my-card">
-                        <img src="http://localhost:8000/storage/images/characters/image1x2.png" alt="Character name"
-                            class="card-img">
+                        <div>
+                            <img src="http://localhost:8000/storage/images/characters/image1x2.png" alt="Character name"
+                                class="card-img">
+                        </div>
+
                         <div class="my-card-content">
                             <div class="inner-cont">
                                 <h4 class=" text-center">Gideon</h4>
                             </div>
-
                         </div>
                     </div>
                     <div class="d-felx flex-column pt-2">
                         <div class="d-flex align-items-center justify-content-end">
-                            <h6 class="m-0">HP</h6>
-                            <span><i class="fa-sharp fa-solid fa-heart fa-beat ms-2"></i></span>
+                            <h6 class="me-2">HP</h6>
+                            <span><i class="fa-sharp fa-solid fa-heart fa-beat me-2"></i></span>
 
                         </div>
                         <div class="health-bar">
@@ -33,6 +35,13 @@
 
     </div>
 </template>
+
+
+
+
+
+
+
             <!-- store.imgPath + character.image -->
                 <!-- {{ character.name }} -->
 
@@ -48,23 +57,31 @@ export default {
 }
 </script>
 
+
+rgb(139, 0, 0)
+
+
+
 <style lang="scss" scoped>
 .card-container {
     padding: 10px;
-    width: 200px;
+    width: 270px;
 
+    i {
+        color: red;
+    }
 
     .my-card {
-        width: 180px;
-        background-color: rgb(139, 0, 0);
-        box-shadow: 0 0 6px 3px rgb(139, 0, 0);
+        width: 200px;
+        background-color: rgb(32, 12, 7);
+        border-radius: 20px;
+        background: #8b0000;
+        box-shadow: 20px 20px 60px #640000,
+            -20px -20px 60px #b20000;
+
 
         img {
             width: 100%;
-        }
-
-        .card-img {
-            border-radius: 5px 5px 0 0;
         }
 
         h4 {
@@ -120,9 +137,18 @@ export default {
 
 .my-effects {
     transition: transform 0.3s ease;
+    background-color: transparent;
 
     &:hover {
         transform: rotate(-5deg) translateX(-150px);
     }
+}
+
+template {
+    background-color: transparent;
+}
+
+.wrapper {
+    background-color: transparent;
 }
 </style>
