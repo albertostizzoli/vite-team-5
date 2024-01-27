@@ -1,19 +1,8 @@
 <template>
     <section class="position-relative">
         <AppHeader />
-        <!-- BUTTON START GAME -->
-        <!--   <div v-if="store.showStartButton" class="mt-5 container d-flex flex-column justify-content-center ">
-            <a @click="playResult" class="btn mt-2 btn-lg" href="#!"
-                :class="(store.selectedCharacterId && store.selectedItemId && store.selectedTypeId) ? 'btn-success' : 'btn-primary'">
-                Start A Game</a>
-
-            <div class="btn btn-warning" id="vincitore">Vincitore: {{ vincitore }}</div>
-            <div class="btn btn-danger" id="vincitore">Vincitore: {{ vincitore == 'PC' ? store.CPUCharacter.name :
-                store.selectedCharacter.name }}
-            </div>
-
-        </div> -->
-        <!--  -->
+        <!-- modifica branch 5 -->
+        <!-- <BattleLogic /> -->
         <router-view class="router"></router-view>
     </section>
     <FooterComponent />
@@ -23,11 +12,15 @@
 import { store } from './store.js';
 import AppHeader from './components/AppHeader.vue';
 import FooterComponent from './components/FooterComponent.vue';
+//modifica branch 5
+import BattleLogic from './test5/BattleLogic.vue';
 export default {
     name: 'App',
     components: {
         AppHeader,
         FooterComponent,
+        // modifica branch 5
+        BattleLogic
     },
     data() {
         return {
