@@ -10,10 +10,11 @@
                 <!-- UL ARENA -->
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0"
                     v-if="store.selectedCharacterId && store.selectedItemId && store.selectedTypeId">
-                    <li class="nav-item text-white mt-2 mx-5 cp" @click="noArena">
-                        Combatterò dopo</li>
-                    <li class="nav-item text-white" @click="goArena">
-                        <router-link :to="{ name: 'home' }" class="nav-link" active-class="active">
+                    <li class="nav-item text-white mx-5 cp d-flex flex-column justify-content-center " @click="noArena">
+                        <div>Combatterò dopo</div>
+                    </li>
+                    <li class="nav-item text-white shake btn-arena" @click="goArena">
+                        <router-link :to="{ name: 'home' }" class="nav-link text-white" active-class="active">
                             Arena</router-link>
                     </li>
                 </ul>
