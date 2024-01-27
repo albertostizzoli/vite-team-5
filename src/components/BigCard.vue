@@ -14,13 +14,21 @@
               </router-link>
             </div>
           </div>
-          <p v-else class="fs-4 text-white">Per giocare seleziona un eroe, un'arma e una categoria!</p>
+          <div v-else>
+            <p class="fs-4 text-white">Per giocare seleziona un eroe, un'arma e una categoria!</p>
+            <p class="fs-4 text-white">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consectetur dicta impedit
+              iusto dolorum vel inventore quo distinctio eligendi minima? Magni nostrum eveniet ut aspernatur perferendis
+              modi similique quibusdam, deserunt, aut maiores repellendus minus cupiditate aperiam numquam corporis
+              incidunt sequi assumenda nesciunt nam. Libero voluptas repudiandae voluptatibus molestias amet fugiat
+              ratione.</p>
+          </div>
+
 
           <div class="w-100 bg-transparent  d-flex flex-row justify-content-between align-items-center p-2 my-0 "
             style="height: 500px;">
             <!-- CARD 1-->
-            <section class="d-flex w-100  justify-content-between ">
-              <div class="containerr">
+            <section class="d-flex  w-100 mt-5 justify-content-between ">
+              <div class="containerr mbb">
                 <div v-if="store.selectedType.image" :data-text="store.selectedType.name" style="--r:-15;"
                   class="glass box-image">
                   <img :src="store.imgPath + store.selectedType.image" :alt="store.selectedType.name">
@@ -34,15 +42,19 @@
                   <img :src="store.imgPath + store.selectedCharacter.image" :alt="store.selectedCharacter.name">
                 </div>
               </div>
+              <div v-if="store.selectedCharacterId && store.selectedItemId && store.selectedTypeId"
+                class="box-image shake">
+                <img class="img-fluid" src="../assets/images/vs.png" alt="versus image">
+              </div>
               <!-- CARD 2 -->
-              <div class="containerr">
-                <div v-if="store.CPUType.image" :data-text="store.CPUType.name" style="--r:-15;" class="glass box-image">
+              <div class="containerr mtt">
+                <div v-if="store.CPUType.image" :data-text="store.CPUType.name" style="--r:15;" class="glass box-image">
                   <img :src="store.imgPath + store.CPUType.image" :alt="store.CPUType.name">
                 </div>
-                <div v-if="store.CPUItem.image" :data-text="store.CPUItem.name" style="--r:5;" class="glass box-imagee">
+                <div v-if="store.CPUItem.image" :data-text="store.CPUItem.name" style="--r:-5;" class="glass box-imagee">
                   <img :src="store.imgPath + store.CPUItem.image" :alt="store.CPUItem.name">
                 </div>
-                <div v-if="store.CPUCharacter.image" :data-text="store.CPUCharacter.name" style="--r:25;"
+                <div v-if="store.CPUCharacter.image" :data-text="store.CPUCharacter.name" style="--r:-25;"
                   class="glass box-image">
                   <img :src="store.imgPath + store.CPUCharacter.image" :alt="store.CPUCharacter.name">
                 </div>
@@ -69,6 +81,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.mbb {
+  margin-bottom: 200px;
+}
+
+.mtt {
+  margin-top: 200px;
+}
+
 .scegli {
   background-color: var(--red-400) !important;
 }
@@ -178,7 +198,6 @@ export default {
   overflow: hidden;
 
   img {
-    scale: 1.1;
     width: 100%;
     height: 100%;
     object-fit: cover;
