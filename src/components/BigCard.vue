@@ -32,9 +32,18 @@
                   </path>
                 </svg>
               </div>
-              <div class="love">
-                <h5 class="text-white text-nowrap text-center w-100">{{ store.selectedCharacter.name ?? 'character' }}
-                </h5>
+              <div class="love d-flex flex-row justify-content-center">
+                <!-- link per andare a pagina show del personaggio -->
+                <div v-if="store.selectedCharacter.id !== undefined">
+                  <router-link  :to="{ name: 'show-character', params: { id: store.selectedCharacter.id } }" class="nav-link" active-class="active">
+                    <h5 class="text-white text-nowrap text-center w-100">
+                      {{ store.selectedCharacter.name ?? 'character' }}
+                    </h5>
+                  </router-link>
+                </div>
+                <div v-else>
+                  <h5 class="text-white text-nowrap text-center ">character</h5>
+                </div>                
               </div>
               <div class="category flex-wrap">
                 <button class="button" v-if="store.selectedCharacter.life">LIFE:&nbsp;{{ store.selectedCharacter.life
@@ -69,8 +78,18 @@
                   </path>
                 </svg>
               </div>
-              <div class="love">
-                <h5 class="text-white text-center w-100">{{ store.selectedItem.name ?? 'item' }}</h5>
+              <div class="love d-flex flex-row justify-content-center ">
+                <div v-if="store.selectedItem.id !== undefined">
+                  <router-link  :to="{ name: 'show-item', params: { id: store.selectedItem.id } }" class="nav-link" active-class="active">
+                    <h5 class="text-white text-nowrap text-center w-100">
+                      {{ store.selectedItem.name ?? 'item' }}
+                    </h5>
+                  </router-link>
+                </div>
+                <div v-else>
+                  <h5 class="text-white text-nowrap text-center ">item</h5>
+                </div>     
+                
               </div>
               <div class="category flex-wrap">
                 <button class="button" v-if="store.selectedItem.type">TYPE: {{ store.selectedItem.type }}</button>
@@ -100,8 +119,18 @@
                   </path>
                 </svg>
               </div>
-              <div class="love">
-                <h5 class="text-white text-center w-100 ">{{ store.selectedType.name ?? 'type' }}</h5>
+              <div class="love d-flex flex-row justify-content-center ">
+                <!-- link per andare a pagina show del type -->
+                <div v-if="store.selectedType.id !== undefined">
+                  <router-link  :to="{ name: 'show-types', params: { id: store.selectedType.id } }" class="nav-link" active-class="active">
+                    <h5 class="text-white text-nowrap text-center w-100">
+                      {{ store.selectedType.name ?? 'type' }}
+                    </h5>
+                  </router-link>
+                </div>
+                <div v-else>
+                  <h5 class="text-white text-nowrap text-center ">type</h5>
+                </div>   
               </div>
               <div class="category">
               </div>
