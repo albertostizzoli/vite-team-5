@@ -3,13 +3,13 @@
         <!-- HEADER -->
         <header>
             <div class="container">
-                <div class="d-felx">
+                <div class="d-flex">
                     <div class="player-stats">
-                        <!-- <h2> Nome Personaggio {{ character.name }}</h2> -->
+                        <h2> Nome Personaggio Giocatore<!-- {{ character.name }}--> </h2>
                         <ul>
                             <li>vita totale: <!--{{ lifeTotaleGiocatore }} --></li>
                             <li>Attacco: <!--{{ playerCharacter.attack }} --> </li>
-                            <li>Difesa: <!--{{ playerCharacter.defence }} --></li>
+                            <li><i class="fa-solid fa-shield"></i> <!--{{ playerCharacter.defence }} --></li>
                             <li>Velocita: <!--{{ playerCharacter.speed }}  --></li>
                         </ul>
 
@@ -17,19 +17,11 @@
                     <div class="counter">
 
                         <h2 class="text-center">Turno: </h2>
-
                     </div>
-
-                    <a @click="chooseAsset" class="btn mt-2 btn-lg" href="#!"
-                        :class="(store.selectedCharacterId && store.selectedItemId && store.selectedTypeId) ? 'btn-success' : 'btn-primary'">
-                        Start A Game
-                    </a>
-
-                    <a class="btn btn-warning my-4" @click="round">{{ roundPlayer1 ? 'attacca' : 'difendi' }}</a>
 
                     <div class="enemy-stats">
 
-                        <h2>Nome Personaggio <!-- {{ character.name }}--></h2>
+                        <h2>Nome Personaggio Avversario <!-- {{ character.name }}--></h2>
                         <ul>
                             <li>vita totale: <!--{{ lifeTotalePC }} --></li>
                             <li>Attacco: <!--{{cpuCharacter.attack }} --> </li>
@@ -44,18 +36,60 @@
 
         </header>
 
+        <!-- START GAME -->
+        <div class="text-center">
+            <div>
+                <a @click="chooseAsset" class="btn mt-2 btn-lg" href="#!"
+                    :class="(store.selectedCharacterId && store.selectedItemId && store.selectedTypeId) ? 'btn-success' : 'btn-primary'">
+                    Start A Game
+                </a>
+            </div>
+
+
+        </div>
+
 
 
         <!-- ARENA -->
 
         <main class="d-flex align-items-center">
+            <div class="container">
+                <div class="row">
+                    <!-- GIOCATORE -->
+                    <div class="col-12 col-md-4">
+                        <div class="protagonista">
+                            <PlayerCard ref="playerCard" :playerCharacter="playerCharacter"
+                                :healthPercentage="barraPercentualeGiocatore" :hitWidth="hitWidth" />
+                            <div class="health-bar">
+                                <div class="bar" :style="{ width: healthPercentage + '%' }">
+                                    <div class="hit" :style="{ width: hitWidth }"></div>
+                                </div>
+                            </div>
+                            <!-- <div class="health-bar">
+                                <div class="bar" :style="'width: ' + barraPercentualeGiocatore + '%'"></div>
+                            </div> -->
+                        </div>
+                    </div>
 
-            <div class="protagonista">
-                <PlayerCard />
+                    <!-- PLAY -->
+                    <div class="col-12 col-md-4">
+
+                        <div class="d-flex flex-column justify-content-end h100">
+                            <a class="btn btn-warning my-4" @click="round">{{ roundPlayer1 ? 'attacca' : 'difendi' }}</a>
+                        </div>
+                    </div>
+
+
+                    <div class="col-12 col-md-4">
+                        <div class="avversario">
+                            <EnemyCard />
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            <div class="avversario">
-                <EnemyCard />
-            </div>
+
+
             <!-- avversario stats -->
             <div class="bg-dark text-white p-1 avversario-2">
 
@@ -77,6 +111,10 @@ export default {
             store,
             lifeTotaleGiocatore: 0,
             lifeTotalePC: 0,
+
+            barraPercentualeGiocatore: 100,
+            barraPercentualeAvversario: 100,
+
             vincitore: null,
 
             playerCharacter: {},
@@ -84,14 +122,16 @@ export default {
 
             roundCount: 0,
             roundPlayer1: true,
+            hitWidth: 0,
         }
     },
     components: {
         PlayerCard,
         EnemyCard,
-        PlayerCard
+
     },
     methods: {
+
         calculateDamage(attack, defence) {
             console.log('attack: ', attack, ' defence: ', defence)
 
@@ -136,12 +176,11 @@ export default {
 
                 //player total hp per grafica 
 
-                this.store.totalPlayerHp = this.playerCharacter.life;
-                this.store.totalEnemyHp = this.cpuCharacter.life;
 
                 // per averli locali
                 this.store.lifeTotaleGiocatore = this.playerCharacter.life;
                 this.store.lifeTotalePC = this.cpuCharacter.life;
+
 
                 console.log('fine selezione ', this.lifeTotaleGiocatore);
 
@@ -171,12 +210,18 @@ export default {
                 this.roundCount += 1;
                 this.roundPlayer1 = !this.roundPlayer1;
 
-                console.log('play selected life after', this.playerCharacter.life)
-                console.log('play bot life after', this.cpuCharacter.life)
+                // console.log('play selected life after', this.playerCharacter.life)
+                // console.log('play bot life after', this.cpuCharacter.life)
 
                 // salvataggio hp nello store
                 this.store.playerHp = this.playerCharacter.life;
                 this.store.enemyHp = this.cpuCharacter.life;
+
+                //aggiorno barra hp
+                this.$refs.playerCard.takeDamage(damageAmount);
+                this.barraPercentualeGiocatore = Math.floor(100 * (Math.max(0, this.playerCharacter.life) / this.lifeTotaleGiocatore));
+                this.barraPercentualeAvversario = Math.floor(100 * (Math.max(0, this.cpuCharacter.life) / this.lifeTotalePC));
+
 
                 //se qualcuno ha vinto 
 
@@ -195,27 +240,30 @@ export default {
 </script>
 
 <style lang="scss">
+.health-bar {
+    margin-top: 25x;
+    width: 100%;
+    height: 20px;
+    background: #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.bar {
+    background: #c54;
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease-in-out;
+}
+
+
 #battle {
     background-image: url('../images/battlearena.jpg');
     width: 100%;
     height: 100vh;
     background-size: cover;
     background-position: center;
-    position: relative;
 }
-
-// .protagonista {
-//     position: absolute;
-//     left: 150px;
-//     bottom: 100px;
-//     background-color: transparent;
-// }
-
-// .avversario {
-//     position: absolute;
-//     top: 140px;
-//     right: 150px;
-// }
 
 header {
     background-color: rgba(0, 0, 0, 0.176);
@@ -225,7 +273,7 @@ header {
 
         ul {
             li {
-                text-decoration: none;
+                list-style: none;
             }
         }
     }
@@ -238,6 +286,10 @@ header {
                 text-decoration: none;
             }
         }
+    }
+
+    .counter {
+        width: 20%;
     }
 
 
@@ -255,3 +307,17 @@ header {
 //     left: 700px;
 // }
 </style>
+
+
+
+<!-- round() {
+  if (this.playerCharacter.life > 0 && this.cpuCharacter.life > 0 && !this.vincitore) {
+    // ... il resto del tuo codice ...
+
+    // Aggiornamento della percentuale di vita
+    this.barraPercentualeGiocatore = (this.playerCharacter.life / this.lifeTotaleGiocatore) * 100;
+    this.barraPercentualeAvversario = (this.cpuCharacter.life / this.lifeTotalePC) * 100;
+    
+    // ... il resto del tuo codice ...
+  }
+} -->

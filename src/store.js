@@ -20,8 +20,5 @@ export const store = reactive({
   CPUItemId: "",
   CPUTypeId: "",
   showStartButton: false,
-  totalEnemyHp: '',
-  totalPlayerHp: "",
-  enemyHp: "",
-  playerHp: ""
+
 });

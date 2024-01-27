@@ -23,7 +23,9 @@
 
                         </div>
                         <div class="health-bar">
-                            <div class="bar" :data-total="store.totalPlayerHp" :data-value="store.playerHp"></div>
+                            <div class="bar" :style="{ width: healthPercentage + '%' }">
+                                <div class="hit" :style="{ width: hitWidth }"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -42,20 +44,44 @@
 import { store } from '../store.js';
 export default {
     name: 'PlayerCard',
+    props: ['playerCharacter'],
     data() {
         return {
             store,
+            healthPercentage: Number,
+            hitWidth: Number
 
         }
     },
     methods: {
+        takeDamage(damage) {
+            let newValue = this.playerCharacter.life - damage;
+            this.healthPercentage = (newValue / this.playerCharacter.maxLife) * 100;
+            this.hitWidth = (damage / this.playerCharacter.life) * 100 + '%';
 
+            // Aspetta che l'animazione del danno sia completata prima di azzerare hitWidth
+            setTimeout(() => {
+                this.hitWidth = '0%';
+            }, 500);
+
+            // Aggiorna la vita del giocatore
+            this.playerCharacter.life = newValue;
+        },
+        resetHealth() {
+            this.playerCharacter.life = this.playerCharacter.maxLife;
+            this.healthPercentage = 100;
+            this.hitWidth = '0%';
+        },
     },
-    computed: {
-        healthBarLen() {
-            return Math.floor((Math.max(this.store.playerHp, 0) / this.store.totalPlayerHp) * 100);
-        }
-    }
+    // computed: {
+    //     barraPercentualeGiocatore() {
+    //         alert(this.barraPercentualeGiocatore); // Log the value
+    //         return this.barraPercentualeGiocatore
+    //     }
+    // },
+    // props: {
+    //     barraPercentualeGiocatore: Number
+    // }
 }
 </script>
 
@@ -120,7 +146,18 @@ export default {
         background: #c54;
         height: 100%;
         border-radius: 4px;
-        transition: width 0.5s ease-in-out;
+        transition: width .5s linear;
+
+        .hit {
+
+            transition: width .5s linear;
+            background: rgba(255, 255, 255, 0.6);
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 0px;
+        }
     }
 }
 

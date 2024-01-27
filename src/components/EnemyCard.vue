@@ -65,7 +65,7 @@ rgb(139, 0, 0)
 <style lang="scss" scoped>
 .card-container {
     padding: 10px;
-    width: 270px;
+    width: 220px;
 
     i {
         color: red;
