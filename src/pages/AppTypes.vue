@@ -1,10 +1,12 @@
 <template>
     <section class="pt-4 page-bg">
         <div class="container px-lg-5 p-3 rounded-3 bg-blur">
-            <PopuP />
+            <!-- <PopuP /> -->
             <h2 class="mb-5 text-white">Choose a Type</h2>
             <div class="row gx-lg-5">
                 <div class="col-lg-6 col-xxl-4 mb-5" v-for=" tipo in store.types" :key="tipo.id">
+                    <PopuP id="pop-up" class="pb-5 position-absolute bottom-50 "
+                        :isActive="store.selectedTypeId === tipo.id" />
                     <div class="card bg-light border-0 h-100">
                         <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
                             <div class="box-image feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
