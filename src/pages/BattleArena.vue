@@ -58,16 +58,13 @@
                     <!-- GIOCATORE -->
                     <div class="col-12 col-md-4">
                         <div class="protagonista">
-                            <PlayerCard ref="playerCard" :playerCharacter="playerCharacter"
-                                :healthPercentage="barraPercentualeGiocatore" :hitWidth="hitWidth" />
+                            <PlayerCard />
+                            
                             <div class="health-bar">
-                                <div class="bar" :style="{ width: healthPercentage + '%' }">
-                                    <div class="hit" :style="{ width: hitWidth }"></div>
+                                <div class="bar" ref="playerHealth">
+                                    
                                 </div>
                             </div>
-                            <!-- <div class="health-bar">
-                                <div class="bar" :style="'width: ' + barraPercentualeGiocatore + '%'"></div>
-                            </div> -->
                         </div>
                     </div>
 
@@ -83,6 +80,11 @@
                     <div class="col-12 col-md-4">
                         <div class="avversario">
                             <EnemyCard />
+                            <div class="health-bar" >
+                                <div class="bar" ref="enemyHealth">
+                                    
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -186,12 +188,10 @@ export default {
 
                 this.vincitore = null;
                 this.roundCount = 0;
+                this.$refs.playerHealth.style.width = '100%';
+                this.$refs.enemyHealth.style.width = '100%';
 
-                // this.lifeTotaleGiocatore = 0;
-                // this.lifeTotalePC = 0;
-                //     this.playerCharacter = {}; 
-                //     this.cpuCharacter = {}
-                //scelta casuale turno iniziale
+               
                 this.roundPlayer1 = Boolean(Math.round(Math.random));
 
             }
@@ -210,19 +210,19 @@ export default {
                 this.roundCount += 1;
                 this.roundPlayer1 = !this.roundPlayer1;
 
-                // console.log('play selected life after', this.playerCharacter.life)
-                // console.log('play bot life after', this.cpuCharacter.life)
-
-                // salvataggio hp nello store
+               
                 this.store.playerHp = this.playerCharacter.life;
                 this.store.enemyHp = this.cpuCharacter.life;
 
                 //aggiorno barra hp
-                this.$refs.playerCard.takeDamage(damageAmount);
-                this.barraPercentualeGiocatore = Math.floor(100 * (Math.max(0, this.playerCharacter.life) / this.lifeTotaleGiocatore));
-                this.barraPercentualeAvversario = Math.floor(100 * (Math.max(0, this.cpuCharacter.life) / this.lifeTotalePC));
+                this.barraPercentualeGiocatore = Math.floor(100 * (Math.max(0, this.playerCharacter.life) / this.store.lifeTotaleGiocatore));
+                this.barraPercentualeAvversario = Math.floor(100 * (Math.max(0, this.cpuCharacter.life) / this.store.lifeTotalePC));
 
-
+                
+                this.$refs.enemyHealth.style.width = Math.floor(100 * (Math.max(0, this.cpuCharacter.life) / this.store.lifeTotalePC))+'%';
+                this.$refs.playerHealth.style.width = Math.floor(100 * (Math.max(0, this.playerCharacter.life) / this.store.lifeTotaleGiocatore))+'%';
+                
+                
                 //se qualcuno ha vinto 
 
                 if (this.playerCharacter.life <= 0 || this.cpuCharacter.life <= 0) {

@@ -24,9 +24,7 @@
                             <span><i class="fa-sharp fa-solid fa-heart fa-beat me-2"></i></span>
 
                         </div>
-                        <div class="health-bar">
-                            <div class="bar"></div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -42,8 +40,7 @@
 
 
 
-            <!-- store.imgPath + character.image -->
-                <!-- {{ character.name }} -->
+       
 
 <script>
 import { store } from '../store.js';

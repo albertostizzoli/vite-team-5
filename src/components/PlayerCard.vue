@@ -22,11 +22,11 @@
                             <h6 class="m-0">HP</h6>
 
                         </div>
-                        <div class="health-bar">
+                        <!-- <div class="health-bar">
                             <div class="bar" :style="{ width: healthPercentage + '%' }">
                                 <div class="hit" :style="{ width: hitWidth }"></div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -54,24 +54,24 @@ export default {
         }
     },
     methods: {
-        takeDamage(damage) {
-            let newValue = this.playerCharacter.life - damage;
-            this.healthPercentage = (newValue / this.playerCharacter.maxLife) * 100;
-            this.hitWidth = (damage / this.playerCharacter.life) * 100 + '%';
+        // takeDamage(damage) {
+        //     let newValue = this.playerCharacter.life - damage;
+        //     this.healthPercentage = (newValue / this.playerCharacter.maxLife) * 100;
+        //     this.hitWidth = (damage / this.playerCharacter.life) * 100 + '%';
 
-            // Aspetta che l'animazione del danno sia completata prima di azzerare hitWidth
-            setTimeout(() => {
-                this.hitWidth = '0%';
-            }, 500);
+        //     // Aspetta che l'animazione del danno sia completata prima di azzerare hitWidth
+        //     setTimeout(() => {
+        //         this.hitWidth = '0%';
+        //     }, 500);
 
-            // Aggiorna la vita del giocatore
-            this.playerCharacter.life = newValue;
-        },
-        resetHealth() {
-            this.playerCharacter.life = this.playerCharacter.maxLife;
-            this.healthPercentage = 100;
-            this.hitWidth = '0%';
-        },
+        //     // Aggiorna la vita del giocatore
+        //     this.playerCharacter.life = newValue;
+        // },
+        // resetHealth() {
+        //     this.playerCharacter.life = this.playerCharacter.maxLife;
+        //     this.healthPercentage = 100;
+        //     this.hitWidth = '0%';
+        // },
     },
     // computed: {
     //     barraPercentualeGiocatore() {
