@@ -1,6 +1,9 @@
 <template>
     <section class="position-relative">
         <AppHeader />
+        <div id="back-snow">
+            <BackgroundSnow />
+        </div>
         <!-- modifica branch 5 -->
         <!-- <BattleLogic /> -->
         <router-view class="router"></router-view>
@@ -14,13 +17,15 @@ import AppHeader from './components/AppHeader.vue';
 import FooterComponent from './components/FooterComponent.vue';
 //modifica branch 5
 import BattleLogic from './test5/BattleLogic.vue';
+import BackgroundSnow from '../src/components/partials/BackgroundSnow.vue';
 export default {
     name: 'App',
     components: {
         AppHeader,
         FooterComponent,
         // modifica branch 5
-        BattleLogic
+        BattleLogic,
+        BackgroundSnow
     },
     data() {
         return {
@@ -106,4 +111,11 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+#back-snow {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: fixed;
+}
+</style>
