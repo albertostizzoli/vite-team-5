@@ -7,7 +7,8 @@
                     <div class="player-stats">
                         <h2 class="my-text-outline"> {{ playerCharacter.name }} </h2>
                         <ul>
-                            <li><i class="fa-solid fa-heart my-text-outline"></i> {{ playerCharacter.life > 0 ?  playerCharacter.life : 0 }} / {{ store.lifeTotaleGiocatore }}</li>
+                            <li><i class="fa-solid fa-heart my-text-outline"></i> {{ playerCharacter.life > 0 ?
+                                playerCharacter.life : 0 }} / {{ store.lifeTotaleGiocatore }}</li>
                             <li><i class="fa-solid fa-hand-fist my-text-outline"></i> {{ playerCharacter.attack }} </li>
                             <li><i class="fa-solid fa-shield my-text-outline"></i> {{ playerCharacter.defence }}</li>
                             <li><i class=" fa-solid fa-person-running"></i> {{ playerCharacter.speed }} </li>
@@ -29,26 +30,29 @@
                             </div>
                         </div>
                         <div v-else class="w-100">
-                             <!-- PLAY -->
+                            <!-- PLAY -->
                             <div class="d-flex flex-column justify-content-center align-items-center h100">
+
                                 <a class="btn my-4" :class="roundPlayer1 ?  'btn-primary' : 'btn-success '" @click="round" style="font-size: 2em;"><i class="fa-solid " :class="roundPlayer1 ?  ' fa-shield ': 'fa-hand-fist'"></i> </a>
+
                             </div>
                         </div>
-                        
-                        
+
+
                     </div>
 
-                    
+
 
                     <div class="enemy-stats d-flex flex-column align-items-end ">
 
                         <h2 class="my-text-outline"> {{ cpuCharacter.name }}</h2>
                         <ul class=" list-unstyled me-4 ">
-                            <li ><i class="fa-solid fa-heart my-text-outline"></i> {{ cpuCharacter.life > 0 ? cpuCharacter.life: '0'}} / {{ store.lifeTotalePC }}</li>
+                            <li><i class="fa-solid fa-heart my-text-outline"></i> {{ cpuCharacter.life > 0 ?
+                                cpuCharacter.life : '0' }} / {{ store.lifeTotalePC }}</li>
                             <li><i class="fa-solid fa-hand-fist my-text-outline"></i> {{ cpuCharacter.attack }} </li>
                             <li><i class="fa-solid fa-shield my-text-outline"></i> {{ cpuCharacter.defence }}</li>
                             <li><i class=" fa-solid fa-person-running "></i> {{ cpuCharacter.speed }} </li>
-                            
+
                         </ul>
                     </div>
                 </div>
@@ -58,7 +62,7 @@
         </header>
 
         <!-- START GAME -->
-       
+
 
 
 
@@ -71,10 +75,10 @@
                     <div class="col-12 col-md-4">
                         <div class="protagonista margin-top-protagonista" ref="playerAnimation">
                             <PlayerCard />
-                            
+
                             <div class="health-bar">
                                 <div class="bar" ref="playerHealth">
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -86,9 +90,9 @@
                     <div class="col-12 col-md-4">
                         <div class="avversario" ref="enemyAnimation">
                             <EnemyCard />
-                            <div class="health-bar " >
+                            <div class="health-bar ">
                                 <div class="bar" ref="enemyHealth">
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -104,12 +108,15 @@
             </div>
         </main>
     </div>
+    <ModalEndGame :vittoria="vittoria" />
 </template>
 
 <script>
 import { store } from '../store.js';
 import PlayerCard from '../components/PlayerCard.vue';
 import EnemyCard from '../components/EnemyCard.vue';
+import ModalEndGame from '../components/EnemyCard.vue';
+
 
 
 export default {
@@ -117,7 +124,7 @@ export default {
     data() {
         return {
             store,
-          
+
 
             barraPercentualeGiocatore: 100,
             barraPercentualeAvversario: 100,
@@ -136,6 +143,7 @@ export default {
     components: {
         PlayerCard,
         EnemyCard,
+        ModalEndGame
 
     },
     methods: {
@@ -178,7 +186,7 @@ export default {
         },
 
         chooseAsset() {
-            
+
             if (this.store.selectedCharacterId && this.store.selectedItemId && this.store.selectedTypeId) {
                 this.vittoria = false;
 
@@ -200,7 +208,7 @@ export default {
                 this.$refs.playerHealth.style.width = '100%';
                 this.$refs.enemyHealth.style.width = '100%';
 
-               
+
                 this.roundPlayer1 = Boolean(Math.round(Math.random));
 
             }
@@ -213,6 +221,7 @@ export default {
                 if (this.roundPlayer1) {
                     this.fightTurn(this.playerCharacter, this.cpuCharacter);
 
+
                    
                     this.$refs.playerAnimation.style.transition = 'transform 0.3s ease';
                     this.$refs.playerAnimation.style.transform= 'rotate(5deg) translateX(150px)';
@@ -222,8 +231,10 @@ export default {
                     
 
 
+
                 } else {
                     this.fightTurn(this.cpuCharacter, this.playerCharacter);
+
                     this.$refs.enemyAnimation.style.transition = 'transform 0.3s ease';
                     this.$refs.enemyAnimation.style.transform= 'rotate(-5deg) translateX(-150px)';
                     setTimeout(()=>{
@@ -235,7 +246,7 @@ export default {
                 this.roundCount += 1;
                 this.roundPlayer1 = !this.roundPlayer1;
 
-               
+
                 this.store.playerHp = this.playerCharacter.life;
                 this.store.enemyHp = this.cpuCharacter.life;
 
@@ -243,11 +254,11 @@ export default {
                 this.barraPercentualeGiocatore = Math.floor(100 * (Math.max(0, this.playerCharacter.life) / this.store.lifeTotaleGiocatore));
                 this.barraPercentualeAvversario = Math.floor(100 * (Math.max(0, this.cpuCharacter.life) / this.store.lifeTotalePC));
 
-                
-                this.$refs.enemyHealth.style.width = Math.floor(100 * (Math.max(0, this.cpuCharacter.life) / this.store.lifeTotalePC))+'%';
-                this.$refs.playerHealth.style.width = Math.floor(100 * (Math.max(0, this.playerCharacter.life) / this.store.lifeTotaleGiocatore))+'%';
-                
-                
+
+                this.$refs.enemyHealth.style.width = Math.floor(100 * (Math.max(0, this.cpuCharacter.life) / this.store.lifeTotalePC)) + '%';
+                this.$refs.playerHealth.style.width = Math.floor(100 * (Math.max(0, this.playerCharacter.life) / this.store.lifeTotaleGiocatore)) + '%';
+
+
                 //se qualcuno ha vinto 
 
                 if (this.playerCharacter.life <= 0 || this.cpuCharacter.life <= 0) {
@@ -262,7 +273,7 @@ export default {
             }
         },
     },
-    mounted(){
+    mounted() {
         this.chooseAsset();
     }
 }
@@ -270,7 +281,7 @@ export default {
 
 <style lang="scss">
 .health-bar {
-    
+
     margin-top: 25x;
     width: 100%;
     height: 20px;
@@ -323,16 +334,16 @@ header {
     .counter {
         width: 20%;
     }
-    
+
 
 
 }
 
-.avversario{
+.avversario {
     width: 80%;
 }
 
-.my-text-outline{
+.my-text-outline {
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: white;
 }
@@ -341,6 +352,7 @@ header {
 .my-effects {
     transition: transform 0.3s ease;
     background-color: transparent;
+
     
     
     
@@ -378,18 +390,8 @@ header {
 
 
 
+
 </style>
 
 
 
-<!-- round() {
-  if (this.playerCharacter.life > 0 && this.cpuCharacter.life > 0 && !this.vincitore) {
-    // ... il resto del tuo codice ...
-
-    // Aggiornamento della percentuale di vita
-    this.barraPercentualeGiocatore = (this.playerCharacter.life / this.lifeTotaleGiocatore) * 100;
-    this.barraPercentualeAvversario = (this.cpuCharacter.life / this.lifeTotalePC) * 100;
-    
-    // ... il resto del tuo codice ...
-  }
-} -->

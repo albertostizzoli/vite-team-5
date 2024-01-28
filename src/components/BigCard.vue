@@ -4,6 +4,7 @@
       <div id="bg-op" class="p-4 p-lg-5  rounded-3 text-center">
         <div class="m-4 m-lg-5">
           <h1 class="display-5 fw-bold text-white">Squiddy Game</h1>
+
           <div v-if="store.selectedCharacterId && store.selectedItemId && store.selectedTypeId" class="fs-4 text-white">
             <p>Hai fatto la tua scelta!</p>
             <div>
@@ -15,6 +16,9 @@
             </div>
           </div>
           <div v-else>
+            <div class="d-flex my-3 justify-content-center">
+              <div class="box-image-circle"><img src="../assets/images/char-bg.png" alt="char-bg"></div>
+            </div>
             <p class="fs-4 text-white">Per giocare seleziona un eroe, un'arma e una categoria!</p>
             <p class="fs-4 text-white">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consectetur dicta impedit
               iusto dolorum vel inventore quo distinctio eligendi minima? Magni nostrum eveniet ut aspernatur perferendis
@@ -59,6 +63,7 @@
                   <img :src="store.imgPath + store.CPUCharacter.image" :alt="store.CPUCharacter.name">
                 </div>
               </div>
+              <img src="" alt="">
             </section>
             <!-- END CARD -->
           </div>
@@ -99,6 +104,7 @@ export default {
 
 #bg-op {
   backdrop-filter: blur(10px);
+  max-height: 1000px !important;
   border: 1px solid rgba(255, 255, 255, 0.521);
 }
 
