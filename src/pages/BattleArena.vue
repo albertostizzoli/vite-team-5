@@ -306,6 +306,8 @@ export default {
     height: 100vh;
     background-size: cover;
     background-position: center;
+    position: relative;
+    z-index: 9999 !important;
 }
 
 header {
@@ -361,7 +363,9 @@ header {
 }
 
 .margin-top-protagonista {
+
     margin-top: 30px;
+
 }
 
 
