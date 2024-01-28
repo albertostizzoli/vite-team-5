@@ -1,8 +1,9 @@
 <template>
-    <section class="page-bg vh-100 py-5">
-        <div class="container p-5 bg-blur">
+    <section class="page-bg vh-100 p-2">
+        <div class="container p-5 bg-blur box">
             <div v-if="type">
-                <div class="mb-5">
+                <div class="mb-5 d-flex justify-content-between align-items-center">
+                    <router-link :to="{name: 'types'}" class="nav-link"><i class="fa-solid fa-left-long arrows"></i></router-link>
                     <h1 class="display-3 text-white text-center">{{ type.name }}</h1>
                 </div>
                 <div class="d-flex justify-content-between align-items-center">
@@ -14,7 +15,6 @@
                             : type.desc }}</p>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -53,4 +53,15 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+.box{
+    border-radius: 15px;
+}
+.arrows{
+    font-size: 50px;
+    color: white;
+    border: 1px solid white;
+    padding: 5px;
+}
+</style>
