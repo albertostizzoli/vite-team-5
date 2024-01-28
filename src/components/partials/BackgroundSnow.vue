@@ -15,10 +15,7 @@ export default {
 <style lang="scss" scoped>
 /*--------------star animation--------------------*/
 
-/* .wrapper {
-    height: 20vh;
-}
- */
+
 #stars {
     width: 1px;
     height: 1px;

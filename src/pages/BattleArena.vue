@@ -17,7 +17,7 @@
                     </div>
                     <div class="counter mt-4 ">
 
-                        <h2 class="text-center my-text-outline" >{{ roundCount }}</h2>
+                        <h2 class="text-center my-text-outline">{{ roundCount }}</h2>
 
                         <div v-if="vittoria">
                             <div class="text-center">
@@ -33,7 +33,9 @@
                             <!-- PLAY -->
                             <div class="d-flex flex-column justify-content-center align-items-center h100">
 
-                                <a class="btn my-4" :class="roundPlayer1 ?  'btn-primary' : 'btn-success '" @click="round" style="font-size: 2em;"><i class="fa-solid " :class="roundPlayer1 ?  ' fa-shield ': 'fa-hand-fist'"></i> </a>
+                                <a class="btn my-4" :class="roundPlayer1 ? 'btn-primary' : 'btn-success '" @click="round"
+                                    style="font-size: 2em;"><i class="fa-solid "
+                                        :class="roundPlayer1 ? ' fa-shield ' : 'fa-hand-fist'"></i> </a>
 
                             </div>
                         </div>
@@ -222,13 +224,13 @@ export default {
                     this.fightTurn(this.playerCharacter, this.cpuCharacter);
 
 
-                   
+
                     this.$refs.playerAnimation.style.transition = 'transform 0.3s ease';
-                    this.$refs.playerAnimation.style.transform= 'rotate(5deg) translateX(150px)';
-                    setTimeout(()=>{
-                        this.$refs.playerAnimation.style.transform= 'rotate(0deg) translateX(-50px)';
+                    this.$refs.playerAnimation.style.transform = 'rotate(5deg) translateX(150px)';
+                    setTimeout(() => {
+                        this.$refs.playerAnimation.style.transform = 'rotate(0deg) translateX(-50px)';
                     }, 300);
-                    
+
 
 
 
@@ -236,11 +238,11 @@ export default {
                     this.fightTurn(this.cpuCharacter, this.playerCharacter);
 
                     this.$refs.enemyAnimation.style.transition = 'transform 0.3s ease';
-                    this.$refs.enemyAnimation.style.transform= 'rotate(-5deg) translateX(-150px)';
-                    setTimeout(()=>{
-                        this.$refs.enemyAnimation.style.transform= 'rotate(0deg) translateX(50px)';
+                    this.$refs.enemyAnimation.style.transform = 'rotate(-5deg) translateX(-150px)';
+                    setTimeout(() => {
+                        this.$refs.enemyAnimation.style.transform = 'rotate(0deg) translateX(50px)';
                     }, 300);
-                    
+
                 }
                 //aumento di 1 il numero totale dei round
                 this.roundCount += 1;
@@ -304,10 +306,12 @@ export default {
     height: 100vh;
     background-size: cover;
     background-position: center;
+    position: relative;
+    z-index: 9999 !important;
 }
 
 header {
-        /* background-color: rgba(0, 0, 0, 0.176); */
+    /* background-color: rgba(0, 0, 0, 0.176); */
     // background: linear-gradient(180deg, #000000b0, transparent);
     // animation: gradient-animation;
 
@@ -353,11 +357,12 @@ header {
     transition: transform 0.3s ease;
     background-color: transparent;
 
-    
-    
-    
+
+
+
 }
-.margin-top-protagonista{
+
+.margin-top-protagonista {
     margin-top: 80px;
 }
 
@@ -365,21 +370,23 @@ header {
 
 
 .gradient-background {
-  background: linear-gradient(180deg,#000000,#80808069, transparent, transparent);
-  background-size: 240% 240%;
-  animation: gradient-animation 4s ease infinite;
+    background: linear-gradient(180deg, #000000, #80808069, transparent, transparent);
+    background-size: 240% 240%;
+    animation: gradient-animation 4s ease infinite;
 }
 
 @keyframes gradient-animation {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 // .counter {
@@ -387,10 +394,6 @@ header {
 //     position: absolute;
 //     left: 700px;
 // }
-
-
-
-
 </style>
 
 

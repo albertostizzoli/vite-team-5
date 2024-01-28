@@ -1,6 +1,6 @@
 <template>
-    <section class="pt-4 page-bg mb-5">
-        <div class="container px-lg-5 p-3 rounded-3 bg-blur">
+    <section class="pt-4 page-bg">
+        <div class="container px-lg-5  p-3 rounded-3 bg-blur">
 
             <h2 class="mb-5 text-white">Choose a Characters</h2>
             <!-- PAGINATION -->
@@ -119,4 +119,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.container {
+    min-height: 100vh;
+}
+</style>
