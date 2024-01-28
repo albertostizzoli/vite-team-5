@@ -1,5 +1,5 @@
 <template>
-    <section v-if="store.showModal" class="z-ind-high mt-5 ">
+    <section v-if="store.showModal" class="z-ind-high mt-5 me-5">
         <div v-show="store.closePopUp" class="code-editor floating border">
             <div class="header">
                 <span class="title mx-3 ">Vuoi tornare alla home?</span>
