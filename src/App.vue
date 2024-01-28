@@ -33,6 +33,7 @@ export default {
             lifeTotaleGiocatore: '',
             lifeTotalePC: '',
             vincitore: '',
+            
             //turno: ''
         }
     },

@@ -1,5 +1,6 @@
 <template>
     <section class="page-bg vh-100 py-5">
+        <LoaderComponent v-if="!character"/>
         <div class="container p-5 bg-blur box">
             <div v-if="character">
                 <div class="mb-5 d-flex justify-content-between align-items-center">
@@ -22,9 +23,11 @@
 </template>
 
 <script>
+import LoaderComponent from '../components/partials/LoaderComponent.vue';
 import axios from 'axios';
 import { store } from '../store.js';
 export default {
+    components: { LoaderComponent} ,
     name: "ShowCharacter",
     data() {
         return {

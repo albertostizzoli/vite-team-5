@@ -1,7 +1,7 @@
 <template>
     <section class="pt-4 page-bg mb-5">
+        
         <div class="container px-lg-5 p-3 rounded-3 bg-blur">
-
             <h2 class="mb-5 text-white">Choose a Characters</h2>
             <!-- PAGINATION -->
             <div class="d-flex justify-content-between mb-5 text-white">
@@ -12,6 +12,7 @@
             </div>
             <!-- END PAGINATION -->
             <div class="row gx-lg-5">
+                <LoaderComponent v-if="store.characters <= 0"/>
                 <div class="col-lg-6 col-xxl-4 mb-5" v-for=" character in store.characters" :key="character.id">
                     <PopuP id="pop-up" class="pb-5 position-absolute bottom-50 "
                         :isActive="store.selectedCharacterId === character.id" />
@@ -51,11 +52,13 @@
 </template>
 
 <script>
+import LoaderComponent from '../components/partials/LoaderComponent.vue';
 import PopuP from '@/components/PopuP.vue';
 import { store } from '../store.js';
 import axios from "axios";
 
 export default {
+    components: { LoaderComponent} ,
     name: "AppCharacters",
     data() {
         return {
@@ -115,7 +118,7 @@ export default {
     mounted() {
         this.getAllCharacters();
     },
-    components: { PopuP }
+    components: { PopuP,LoaderComponent }
 }
 </script>
 

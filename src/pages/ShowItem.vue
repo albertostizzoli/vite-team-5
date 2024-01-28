@@ -1,5 +1,6 @@
 <template>
     <section class="page-bg vh-100 p-2">
+        <LoaderComponent v-if="!item"/>
         <div class="container p-5 bg-blur box">
             <div v-if="item">
                 <div class="mb-5 d-flex justify-content-between align-items-center">
@@ -22,9 +23,11 @@
 </template>
 
 <script>
+import LoaderComponent from '../components/partials/LoaderComponent.vue';
 import axios from 'axios';
 import { store } from '../store.js';
 export default {
+    components: { LoaderComponent} ,
     name: "ShowItem",
     data() {
         return {

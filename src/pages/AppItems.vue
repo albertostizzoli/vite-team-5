@@ -11,6 +11,7 @@
             </div>
             <!-- END PAGINATION -->
             <div class="row gx-lg-5">
+                <LoaderComponent v-if="store.items <= 0"/>
                 <div class="col-lg-6 col-xxl-4 mb-5" v-for="item in   store.items  " :key="item.id">
                     <PopuP id="pop-up" class="pb-5 position-absolute bottom-50 "
                         :isActive="store.selectedItemId === item.id" />
@@ -49,6 +50,7 @@
 </template>
 
 <script>
+import LoaderComponent from '../components/partials/LoaderComponent.vue';
 import PopuP from "@/components/PopuP.vue";
 import { store } from "../store.js";
 import axios from "axios";
@@ -119,7 +121,7 @@ export default {
     mounted() {
         this.getAllItems();
     },
-    components: { PopuP }
+    components: { PopuP, LoaderComponent }
 };
 </script>
 

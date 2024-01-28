@@ -4,6 +4,7 @@
             <!-- <PopuP /> -->
             <h2 class="mb-5 text-white">Choose a Type</h2>
             <div class="row gx-lg-5">
+                <LoaderComponent v-if="store.types <= 0"/>
                 <div class="col-lg-6 col-xxl-4 mb-5" v-for=" tipo in store.types" :key="tipo.id">
                     <PopuP id="pop-up" class="pb-5 position-absolute bottom-50 "
                         :isActive="store.selectedTypeId === tipo.id" />
@@ -35,6 +36,7 @@
 </template>
 
 <script>
+import LoaderComponent from '../components/partials/LoaderComponent.vue';
 import axios from 'axios';
 import { store } from '../store.js';
 import PopuP from '@/components/PopuP.vue';
@@ -86,7 +88,7 @@ export default {
     mounted() {
         this.getAllTypes();
     },
-    components: { PopuP }
+    components: { PopuP, LoaderComponent }
 }
 </script>
 
