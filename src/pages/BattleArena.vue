@@ -51,6 +51,9 @@
                         <div v-else class="w-100">
                             <!-- PLAY -->
                             <div class="d-flex flex-column justify-content-center align-items-center h100">
+                                <!-- Sotto il pulsante di attacco -->
+                                <div v-if="hitSuccess" class="message">Colpo a segno!</div>
+                                <div v-if="dodgeSuccess" class="message">Schivata!</div>
 
                                 <a class=" my-4" :class="roundPlayer1 ? 'text-black' : 'text-light '" @click="round"
                                     style="font-size: 2em;">
@@ -231,7 +234,8 @@ export default {
         return {
             store,
 
-
+            hitSuccess: false,
+            dodgeSuccess: false,
             barraPercentualeGiocatore: 100,
             barraPercentualeAvversario: 100,
 
@@ -299,11 +303,17 @@ export default {
 
             if (Math.random() * 100 < dodgeChance) {
                 damage = 0;
+                this.dodgeSuccess = true; // Schivata riuscita
+                setTimeout(() => this.dodgeSuccess = false, 2000); // Reset dopo 2 secondi
+            } else {
+                this.hitSuccess = true; // Colpo a segno
+                setTimeout(() => this.hitSuccess = false, 2000); // Reset dopo 2 secondi
             }
 
             defender.life -= damage;
             return defender.life <= 0;
         },
+
 
         chooseAsset() {
 
