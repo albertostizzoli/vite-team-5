@@ -5,30 +5,51 @@
             <div class="container">
                 <div class="d-flex">
                     <div class="player-stats">
-                        <h2> Nome Personaggio Giocatore<!-- {{ character.name }}--> </h2>
+                        <h2 class="my-text-outline"> {{ playerCharacter.name }} </h2>
                         <ul>
-                            <li>vita totale: <!--{{ lifeTotaleGiocatore }} --></li>
-                            <li>Attacco: <!--{{ playerCharacter.attack }} --> </li>
-                            <li><i class="fa-solid fa-shield"></i> <!--{{ playerCharacter.defence }} --></li>
-                            <li>Velocita: <!--{{ playerCharacter.speed }}  --></li>
+                            <li><i class="fa-solid fa-heart my-text-outline"></i> {{ playerCharacter.life > 0 ?  playerCharacter.life : 0 }} / {{ store.lifeTotaleGiocatore }}</li>
+                            <li><i class="fa-solid fa-hand-fist my-text-outline"></i> {{ playerCharacter.attack }} </li>
+                            <li><i class="fa-solid fa-shield my-text-outline"></i> {{ playerCharacter.defence }}</li>
+                            <li><i class=" fa-solid fa-person-running"></i> {{ playerCharacter.speed }} </li>
                         </ul>
 
                     </div>
-                    <div class="counter">
+                    <div class="counter mt-4 ">
 
-                        <h2 class="text-center">Turno: </h2>
+                        <h2 class="text-center">ROUND: {{ roundCount }}</h2>
+
+                        <div v-if="vittoria">
+                            <div class="text-center">
+                                <div>
+                                    <a @click="chooseAsset" class="btn mt-2 btn-lg" href="#!"
+                                        :class="(store.selectedCharacterId && store.selectedItemId && store.selectedTypeId) ? 'btn-success' : 'btn-primary'">
+                                        Start A Game
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div v-else class="w-100">
+                             <!-- PLAY -->
+                            <div class="d-flex flex-column justify-content-center align-items-center h100">
+                                <a class="btn btn-warning my-4" @click="round"><i class="fa-solid " :class="roundPlayer1 ?  ' fa-shield ': 'fa-hand-fist'"></i> {{ roundPlayer1 ? 'difendi' : 'attacca'  }}</a>
+                            </div>
+                        </div>
+                        
+                        
                     </div>
 
-                    <div class="enemy-stats">
+                    
 
-                        <h2>Nome Personaggio Avversario <!-- {{ character.name }}--></h2>
-                        <ul>
-                            <li>vita totale: <!--{{ lifeTotalePC }} --></li>
-                            <li>Attacco: <!--{{cpuCharacter.attack }} --> </li>
-                            <li>Difesa: <!--{{ cpuCharacter.defence }} --></li>
-                            <li>Velocita: <!--{{ cpuCharacter.speed }}  --></li>
+                    <div class="enemy-stats d-flex flex-column align-items-end ">
+
+                        <h2 class="my-text-outline"> {{ cpuCharacter.name }}</h2>
+                        <ul class=" list-unstyled me-4 ">
+                            <li ><i class="fa-solid fa-heart my-text-outline"></i> {{ cpuCharacter.life > 0 ? cpuCharacter.life: '0'}} / {{ store.lifeTotalePC }}</li>
+                            <li><i class="fa-solid fa-hand-fist my-text-outline"></i> {{ cpuCharacter.attack }} </li>
+                            <li><i class="fa-solid fa-shield my-text-outline"></i> {{ cpuCharacter.defence }}</li>
+                            <li><i class=" fa-solid fa-person-running "></i> {{ cpuCharacter.speed }} </li>
+                            
                         </ul>
-                        vita rimasta: {{ cpuCharacter.life > 0 ? cpuCharacter.life : '0' }}
                     </div>
                 </div>
 
@@ -37,16 +58,7 @@
         </header>
 
         <!-- START GAME -->
-        <div class="text-center">
-            <div>
-                <a @click="chooseAsset" class="btn mt-2 btn-lg" href="#!"
-                    :class="(store.selectedCharacterId && store.selectedItemId && store.selectedTypeId) ? 'btn-success' : 'btn-primary'">
-                    Start A Game
-                </a>
-            </div>
-
-
-        </div>
+       
 
 
 
@@ -57,7 +69,7 @@
                 <div class="row">
                     <!-- GIOCATORE -->
                     <div class="col-12 col-md-4">
-                        <div class="protagonista">
+                        <div class="protagonista" ref="playerAnimation">
                             <PlayerCard />
                             
                             <div class="health-bar">
@@ -68,19 +80,13 @@
                         </div>
                     </div>
 
-                    <!-- PLAY -->
-                    <div class="col-12 col-md-4">
-
-                        <div class="d-flex flex-column justify-content-end h100">
-                            <a class="btn btn-warning my-4" @click="round">{{ roundPlayer1 ? 'attacca' : 'difendi' }}</a>
-                        </div>
-                    </div>
+                    <div class="col-12 col-md-4"></div>
 
 
                     <div class="col-12 col-md-4">
-                        <div class="avversario">
+                        <div class="avversario" ref="enemyAnimation">
                             <EnemyCard />
-                            <div class="health-bar" >
+                            <div class="health-bar " >
                                 <div class="bar" ref="enemyHealth">
                                     
                                 </div>
@@ -111,8 +117,7 @@ export default {
     data() {
         return {
             store,
-            lifeTotaleGiocatore: 0,
-            lifeTotalePC: 0,
+          
 
             barraPercentualeGiocatore: 100,
             barraPercentualeAvversario: 100,
@@ -125,6 +130,7 @@ export default {
             roundCount: 0,
             roundPlayer1: true,
             hitWidth: 0,
+            vittoria: false
         }
     },
     components: {
@@ -172,7 +178,10 @@ export default {
         },
 
         chooseAsset() {
+            
             if (this.store.selectedCharacterId && this.store.selectedItemId && this.store.selectedTypeId) {
+                this.vittoria = false;
+
                 this.playerCharacter = this.applyItemEffects(this.store.selectedCharacter, this.store.selectedItem);
                 this.cpuCharacter = this.applyItemEffects(this.store.CPUCharacter, this.store.CPUItem);
 
@@ -203,8 +212,24 @@ export default {
 
                 if (this.roundPlayer1) {
                     this.fightTurn(this.playerCharacter, this.cpuCharacter);
+
+                    this.$refs.enemyAnimation.style.transition = 'transform 0.3s ease';
+                    this.$refs.enemyAnimation.style.transform= 'rotate(-5deg) translateX(-150px)';
+                    setTimeout(()=>{
+                        this.$refs.enemyAnimation.style.transform= 'rotate(0deg) translateX(50px)';
+                    }, 300);
+                    
+                    
+
+
                 } else {
                     this.fightTurn(this.cpuCharacter, this.playerCharacter);
+
+                    this.$refs.playerAnimation.style.transition = 'transform 0.3s ease';
+                    this.$refs.playerAnimation.style.transform= 'rotate(5deg) translateX(150px)';
+                    setTimeout(()=>{
+                        this.$refs.playerAnimation.style.transform= 'rotate(0deg) translateX(-50px)';
+                    }, 300);
                 }
                 //aumento di 1 il numero totale dei round
                 this.roundCount += 1;
@@ -229,18 +254,23 @@ export default {
                     this.vincitore = this.playerCharacter.life > 0 ? 'Giocatore' : 'PC';
                     console.log(this.vincitore)
 
+                    this.vittoria = true;
                     //resettiamo ? 
 
                 }
 
             }
         },
+    },
+    mounted(){
+        this.chooseAsset();
     }
 }
 </script>
 
 <style lang="scss">
 .health-bar {
+    
     margin-top: 25x;
     width: 100%;
     height: 20px;
@@ -291,12 +321,28 @@ header {
     .counter {
         width: 20%;
     }
-
+    
 
 
 }
 
+.avversario{
+    width: 80%;
+}
 
+.my-text-outline{
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: white;
+}
+
+//spostare la logica di attacco nelle componenti superiori
+.my-effects {
+    transition: transform 0.3s ease;
+    background-color: transparent;
+    
+    
+    
+}
 
 
 
