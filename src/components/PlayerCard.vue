@@ -116,7 +116,7 @@ export default {
 
             .inner-cont {
                 padding: 0;
-                border: 1px solid rgb(192, 183, 187);
+                //border: 1px solid rgb(192, 183, 187);
                 border-radius: 15px;
 
                 .h4 {

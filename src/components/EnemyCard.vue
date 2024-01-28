@@ -6,10 +6,10 @@
             </div>
             <div class="card-container">
                 <div class=" me-2">
-                    <div class="my-card">
+                    <div class="my-card overflow-hidden ">
                         <div>
                             <img :src="'http://localhost:8000/storage/'+store.CPUCharacter.image" alt="Character name"
-                                class="card-img">
+                                class="card-img overflow-hidden">
                         </div>
 
                         <div class="my-card-content">
@@ -73,8 +73,8 @@ rgb(139, 0, 0)
         background-color: rgb(32, 12, 7);
         border-radius: 20px;
         background: #8b0000;
-        box-shadow: 20px 20px 60px #640000,
-            -20px -20px 60px #b20000;
+        box-shadow: 10px 10px 30px #640000,
+            -10px -10px 30px #b20000;
 
 
         img {
@@ -91,7 +91,7 @@ rgb(139, 0, 0)
 
             .inner-cont {
                 padding: 0;
-                border: 1px solid rgb(192, 183, 187);
+                //border: 1px solid rgb(192, 183, 187);
                 border-radius: 15px;
 
                 .h4 {
@@ -132,14 +132,14 @@ rgb(139, 0, 0)
     }
 }
 
-.my-effects {
-    transition: transform 0.3s ease;
-    background-color: transparent;
+// .my-effects {
+//     transition: transform 0.3s ease;
+//     background-color: transparent;
 
-    &:hover {
-        transform: rotate(-5deg) translateX(-150px);
-    }
-}
+//     &:hover {
+//         transform: rotate(-5deg) translateX(-150px);
+//     }
+// }
 
 template {
     background-color: transparent;
