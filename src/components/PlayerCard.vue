@@ -1,23 +1,23 @@
 <template>
     <div class="wrapper">
-        <div class="d-flex align-items-end my-effects">
+        <div class="d-flex align-items-end justify-content-evenly my-effects">
             <div class="card-container">
                 <div class=" me-2">
                     <div class="my-card">
                         <div>
-                            <img src="http://localhost:8000/storage/images/characters/image1x1.png" alt="Character name"
+                            <img :src="'http://localhost:8000/storage/'+store.selectedCharacter.image" alt="Character name"
                                 class="card-img">
                         </div>
 
                         <div class="my-card-content">
                             <div class="inner-cont">
-                                <h4 class=" text-center">Gideon</h4>
+                                <h4 class=" text-center">{{ this.store.selectedCharacter.name ?? 'nome'}}</h4>
                             </div>
 
                         </div>
                     </div>
-                    <div class="d-felx flex-column pt-2">
-                        <div class="d-flex align-items-center">
+                    <div class="d-flex flex-column pt-2">
+                        <div class="d-flex align-items-center ">
                             <span><i class="fa-sharp fa-solid fa-heart fa-beat me-2"></i></span>
                             <h6 class="m-0">HP</h6>
 
@@ -31,15 +31,13 @@
                 </div>
             </div>
             <div class="item-card ms-2">
-                <img src="http://localhost:8000/storage//images/items/dagger.png" alt="">
+                <img :src="'http://localhost:8000/storage'+store.selectedItem.image" alt="">
             </div>
         </div>
 
     </div>
 </template>
-            <!-- store.imgPath + character.image -->
-                <!-- {{ character.name }} -->
-
+          
 <script>
 import { store } from '../store.js';
 export default {
@@ -170,14 +168,14 @@ export default {
     }
 }
 
-.my-effects {
-    transition: transform 0.3s ease;
-    background-color: transparent;
+// .my-effects {
+//     transition: transform 0.3s ease;
+//     background-color: transparent;
 
-    &:hover {
-        transform: rotate(5deg) translateX(150px);
-    }
-}
+//     &:hover {
+//         transform: rotate(5deg) translateX(150px);
+//     }
+// }
 
 template {
     background-color: transparent;

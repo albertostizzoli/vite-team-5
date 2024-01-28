@@ -1,20 +1,20 @@
 <template>
     <div class="wrapper">
-        <div class="d-flex align-items-end my-effects">
-            <div class="item-card ms-2">
-                <img src="http://localhost:8000/storage//images/items/speav.png" alt="">
+        <div class="d-flex align-items-end my-effects justify-content-evenly ">
+            <div class="item-card ">
+                <img :src="'http://localhost:8000/storage/'+store.CPUItem.image" alt="">
             </div>
             <div class="card-container">
                 <div class=" me-2">
                     <div class="my-card">
                         <div>
-                            <img src="http://localhost:8000/storage/images/characters/image1x2.png" alt="Character name"
+                            <img :src="'http://localhost:8000/storage/'+store.CPUCharacter.image" alt="Character name"
                                 class="card-img">
                         </div>
 
                         <div class="my-card-content">
                             <div class="inner-cont">
-                                <h4 class=" text-center">Gideon</h4>
+                                <h4 class=" text-center">{{ this.store.CPUCharacter.name ?? 'name' }}</h4>
                             </div>
                         </div>
                     </div>
