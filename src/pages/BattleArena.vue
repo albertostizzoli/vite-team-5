@@ -22,9 +22,28 @@
                         <div v-if="vittoria">
                             <div class="text-center">
                                 <div>
-                                    <a @click="chooseAsset" class="btn mt-2 btn-lg" href="#!"
+                                    <a @click="chooseAsset" class="mt-2 btn-lg" href="#!"
                                         :class="(store.selectedCharacterId && store.selectedItemId && store.selectedTypeId) ? 'btn-success' : 'btn-primary'">
-                                        <i class="fa-solid fa-reply"></i>
+                                        <button class="button">
+                                            <div class="bloom-container">
+                                                <div class="button-container-main">
+                                                    <div class="button-inner">
+                                                        <div class="back"></div>
+                                                        <div class="front">
+                                                            <i class="fa-solid fa-reply"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="button-glass">
+                                                        <div class="back"></div>
+                                                        <div class="front"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="bloom bloom1"></div>
+                                                <div class="bloom bloom2">
+                                                </div>
+                                            </div>
+                                        </button>
+
                                     </a>
                                 </div>
                             </div>
@@ -33,9 +52,29 @@
                             <!-- PLAY -->
                             <div class="d-flex flex-column justify-content-center align-items-center h100">
 
-                                <a class="btn my-4" :class="roundPlayer1 ? 'btn-danger' : 'btn-primary '" @click="round"
-                                    style="font-size: 2em;"><i class="fa-solid "
-                                        :class="roundPlayer1 ? 'fa-hand-fist' : ' fa-shield'"></i> </a>
+                                <a class=" my-4" :class="roundPlayer1 ? 'text-black' : 'text-light '" @click="round"
+                                    style="font-size: 2em;">
+                                    <button class="button">
+                                        <div class="bloom-container">
+                                            <div class="button-container-main">
+                                                <div class="button-inner">
+                                                    <div class="back"></div>
+                                                    <div class="front">
+                                                        <i class="fa-solid "
+                                                            :class="roundPlayer1 ? 'fa-hand-fist text-danger' : ' fa-shield text-black'"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="button-glass">
+                                                    <div class="back"></div>
+                                                    <div class="front"></div>
+                                                </div>
+                                            </div>
+                                            <div class="bloom bloom1"></div>
+                                            <div class="bloom bloom2">
+                                            </div>
+                                        </div>
+                                    </button>
+                                </a>
 
                             </div>
                         </div>
@@ -123,13 +162,51 @@
                         Hai perso <i class="fa-solid fa-heart-crack fa-fade " style="color: red;"></i>
                     </div>
                     <div class=" d-flex flex-row justify-content-center align-items-center gap-3">
-                        <a @click="chooseAsset" class="btn mt-2 btn-lg" href="#!"
+                        <a @click="chooseAsset" class="mt-2 btn-lg" href="#!"
                             :class="(store.selectedCharacterId && store.selectedItemId && store.selectedTypeId) ? 'btn-success' : 'btn-primary'">
-                            <i class="fa-solid fa-reply"></i>
+                            <button class="button">
+                                <div class="bloom-container">
+                                    <div class="button-container-main">
+                                        <div class="button-inner">
+                                            <div class="back"></div>
+                                            <div class="front">
+                                                <i class="fa-solid fa-reply"></i>
+                                            </div>
+                                        </div>
+                                        <div class="button-glass">
+                                            <div class="back"></div>
+                                            <div class="front"></div>
+                                        </div>
+                                    </div>
+                                    <div class="bloom bloom1"></div>
+                                    <div class="bloom bloom2">
+                                    </div>
+                                </div>
+                            </button>
+                            <h4 class="text-center text-black">Riprova</h4>
                         </a>
 
-                        <router-link :to="{ name: 'home' }" class="btn mt-2 btn-lg btn-warning">
-                            <i class="fa-solid fa-home "></i>
+                        <router-link @click="noArena" :to="{ name: 'home' }" class="mt-2 btn-lg btn-warning">
+                            <button class="button">
+                                <div class="bloom-container">
+                                    <div class="button-container-main">
+                                        <div class="button-inner">
+                                            <div class="back"></div>
+                                            <div class="front">
+                                                <i class="fa-solid fa-home "></i>
+                                            </div>
+                                        </div>
+                                        <div class="button-glass">
+                                            <div class="back"></div>
+                                            <div class="front"></div>
+                                        </div>
+                                    </div>
+                                    <div class="bloom bloom1"></div>
+                                    <div class="bloom bloom2">
+                                    </div>
+                                </div>
+                            </button>
+                            <h4 class="text-center text-black">Esci</h4>
                         </router-link>
                     </div>
                 </div>
@@ -176,7 +253,21 @@ export default {
 
     },
     methods: {
-
+        noArena() {
+            this.store.selectedCharacterId = null;
+            this.store.selectedItemId = null;
+            this.store.selectedTypeId = null;
+            this.store.selectedCharacter = {};
+            this.store.selectedItem = {};
+            this.store.selectedType = {};
+            this.store.showStartButton = false;
+            this.store.CPUCharacter = {};
+            this.store.CPUItem = {};
+            this.store.CPUType = {};
+            this.store.CPUCharacterId = null;
+            this.store.CPUItemId = null;
+            this.store.CPUTypeId = null;
+        },
         calculateDamage(attack, defence) {
             console.log('attack: ', attack, ' defence: ', defence)
 
@@ -333,7 +424,7 @@ export default {
 
 
 #battle {
-    background-image: url('../images/battlearena.jpg');
+    background-image: url('../images/battlearena2.png');
     width: 100%;
     height: 100vh;
     background-size: cover;
