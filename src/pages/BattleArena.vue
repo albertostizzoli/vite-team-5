@@ -70,7 +70,7 @@
 
         <!-- ARENA -->
 
-        <main class="d-flex align-items-center pt-5">
+        <main class="d-flex align-items-center pt-5 position-relative">
             <div class="container">
                 <div class="row">
                     <!-- GIOCATORE -->
@@ -86,9 +86,15 @@
                         </div>
                     </div>
 
-                    <div class="col-12 col-md-4"></div>
+
+                    <!-- ANIMAZIONI -->
+                    <div class="col-12 col-md-4">
 
 
+
+                    </div>
+
+                    <!-- AVVERSARIO -->
                     <div class="col-12 col-md-4">
                         <div class="avversario" ref="enemyAnimation">
                             <EnemyCard />
@@ -103,14 +109,35 @@
 
             </div>
 
+            <!-- MESSAGGIO VITTORIA -->
 
-            <!-- avversario stats -->
-            <div class="bg-dark text-white p-1 avversario-2">
+            <div class="position-absolute absolute-centered " v-if="vittoria">
+
+                <div
+                    class="my-win bg-blur d-flex flex-column justify-content-center align-items-center gap-2 rounded-3 floating">
+
+                    <div v-if="playerCharacter.life > 0" class="fs-1">
+                        Hai vinto <i class="fa-solid fa-trophy fa-beat" style="color: gold;"></i>
+                    </div>
+                    <div v-else class="fs-1">
+                        Hai perso <i class="fa-solid fa-heart-crack fa-fade " style="color: red;"></i>
+                    </div>
+                    <div class=" d-flex flex-row justify-content-center align-items-center gap-3">
+                        <a @click="chooseAsset" class="btn mt-2 btn-lg" href="#!"
+                            :class="(store.selectedCharacterId && store.selectedItemId && store.selectedTypeId) ? 'btn-success' : 'btn-primary'">
+                            <i class="fa-solid fa-reply"></i>
+                        </a>
+
+                        <router-link :to="{ name: 'home' }" class="btn mt-2 btn-lg btn-warning">
+                            <i class="fa-solid fa-home "></i>
+                        </router-link>
+                    </div>
+                </div>
 
             </div>
         </main>
+
     </div>
-    <!-- <ModalEndGame :vittoria="vittoria" /> -->
 </template>
 
 <script>
@@ -281,15 +308,20 @@ export default {
 }
 </script>
 
-<style lang="scss">
-.health-bar {
+<style lang="scss" scoped>
+.absolute-centered {
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 400px;
+    transform: translate(-50%, -50%);
+}
 
-    margin-top: 25x;
-    width: 100%;
-    height: 20px;
+.health-bar {
     background: #ddd;
     border-radius: 5px;
     box-sizing: border-box;
+    height: 20px;
 }
 
 .bar {
@@ -391,11 +423,9 @@ header {
     }
 }
 
-// .counter {
-//     width: 70px;
-//     position: absolute;
-//     left: 700px;
-// }
+.my-win {
+    padding: 20px;
+}
 </style>
 
 
