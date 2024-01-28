@@ -33,9 +33,9 @@
                             <!-- PLAY -->
                             <div class="d-flex flex-column justify-content-center align-items-center h100">
 
-                                <a class="btn my-4" :class="roundPlayer1 ? 'btn-primary' : 'btn-success '" @click="round"
+                                <a class="btn my-4" :class="roundPlayer1 ? 'btn-danger' : 'btn-primary '" @click="round"
                                     style="font-size: 2em;"><i class="fa-solid "
-                                        :class="roundPlayer1 ? ' fa-shield ' : 'fa-hand-fist'"></i> </a>
+                                        :class="roundPlayer1 ? 'fa-hand-fist' : ' fa-shield'"></i> </a>
 
                             </div>
                         </div>
