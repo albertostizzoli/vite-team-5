@@ -30,7 +30,7 @@
 
 
                     <!-- PAGINA DI PROVA -->
-                    
+
                 </ul>
             </div>
         </div>
@@ -38,7 +38,7 @@
     <!-- SELECTED CHARACTERS -->
     <Transition name="fade" v-if="showArenaButton">
         <div class="d-flex page-bg" v-if="store.selectedCharacterId || store.selectedItemId || store.selectedTypeId">
-            <section id="bottom-bar" class="bg-blur border-0 w-50">
+            <section id="bottom-bar" class="bg-blur border-0  w-50">
                 <div class="container text-primary px-4 mt-3 d-flex justify-content-between ">
                     <div class="d-flex gx-5 x">
                         <div>
