@@ -29,6 +29,7 @@ $fa-font-path: '../webfonts';
     object-fit: cover;
   }
 }
+
 body{
   background-color:black;
   font-family: 'Kanit', sans-serif;
@@ -42,7 +43,7 @@ body{
 
 .bg-blur{
   backdrop-filter: blur(10px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.521) !important;
+  border: 1px solid rgba(255, 255, 255, 0.521) ;
 }
 //bottone
 

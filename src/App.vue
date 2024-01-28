@@ -8,7 +8,7 @@
         <!-- <BattleLogic /> -->
         <router-view class="router"></router-view>
     </section>
-    <FooterComponent />
+    <FooterComponent id="footer-com" />
 </template>
 
 <script>
@@ -113,6 +113,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#footer-com {
+    margin-top: 70px;
+}
+
 #back-snow {
     width: 100%;
     height: 100%;
