@@ -1,5 +1,5 @@
 <template>
-    <section class="pt-4 page-bg">
+    <section class="pt-4 page-bg mb-5">
         <div class="container px-lg-5 p-3 rounded-3 bg-blur">
             <h2 class="mb-5 text-white">Choose an Items</h2>
             <!-- PAGINATION -->

@@ -10,8 +10,10 @@
                 <!-- UL ARENA -->
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0"
                     v-if="store.selectedCharacterId && store.selectedItemId && store.selectedTypeId">
-                    <li class="nav-item text-white mx-5 cp d-flex flex-column justify-content-center " @click="noArena">
-                        <div>Combatterò dopo</div>
+                    <li @click="store.showModal = !store.showModal, store.closePopUp = true"
+                        class="nav-item text-white mx-5 cp d-flex flex-column justify-content-center ">
+                        Combatterò dopo
+                        <ModalBack @confirmBack="noArena" class="position-absolute" />
                     </li>
                     <li v-if="showArenaButton" class="nav-item text-white shake btn-arena"
                         @click="goArena, showArenaButton = false">
@@ -89,6 +91,7 @@
 
 <script>
 import { store } from "../store.js";
+import ModalBack from "./ModalBack.vue";
 export default {
     name: "AppHeader",
     data() {
@@ -113,7 +116,7 @@ export default {
                     name: "types",
                 },
             ],
-        }
+        };
     },
     methods: {
         noArena() {
@@ -130,14 +133,16 @@ export default {
             this.store.CPUCharacterId = null;
             this.store.CPUItemId = null;
             this.store.CPUTypeId = null;
-            this.store.closePopUp = true;
+            this.store.closePopUp = !this.store.closePopUp;
             this.showArenaButton = true;
-
+            this.store.showModal = false;
         },
         goArena() {
             this.store.showStartButton = true;
         }
     },
+    components: { ModalBack },
+
 
 }
 </script>
