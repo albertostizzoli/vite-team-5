@@ -110,14 +110,14 @@
             </div>
         </main>
     </div>
-    <ModalEndGame :vittoria="vittoria" />
+    <!-- <ModalEndGame :vittoria="vittoria" /> -->
 </template>
 
 <script>
 import { store } from '../store.js';
 import PlayerCard from '../components/PlayerCard.vue';
 import EnemyCard from '../components/EnemyCard.vue';
-import ModalEndGame from '../components/EnemyCard.vue';
+// import ModalEndGame from '../components/ModalEndGame.vue';
 
 
 
@@ -145,7 +145,7 @@ export default {
     components: {
         PlayerCard,
         EnemyCard,
-        ModalEndGame
+        // ModalEndGame
 
     },
     methods: {
@@ -363,7 +363,9 @@ header {
 }
 
 .margin-top-protagonista {
-    margin-top: 80px;
+
+    margin-top: 30px;
+
 }
 
 
