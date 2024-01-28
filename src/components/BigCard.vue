@@ -20,11 +20,7 @@
               <div class="box-image-circle"><img src="../assets/images/char-bg.png" alt="char-bg"></div>
             </div>
             <p class="fs-4 text-white">Per giocare seleziona un eroe, un'arma e una categoria!</p>
-            <p class="fs-4 text-white">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consectetur dicta impedit
-              iusto dolorum vel inventore quo distinctio eligendi minima? Magni nostrum eveniet ut aspernatur perferendis
-              modi similique quibusdam, deserunt, aut maiores repellendus minus cupiditate aperiam numquam corporis
-              incidunt sequi assumenda nesciunt nam. Libero voluptas repudiandae voluptatibus molestias amet fugiat
-              ratione.</p>
+
           </div>
 
 
