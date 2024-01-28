@@ -1,6 +1,6 @@
 <template>
     <section class="pt-4 page-bg">
-        <div class="container px-lg-5 p-3 rounded-3 bg-blur">
+        <div class="container px-lg-5 p-3 rounded-3 bg-blur mb-5">
             <!-- <PopuP /> -->
             <h2 class="mb-5 text-white">Choose a Type</h2>
             <div class="row gx-lg-5">
