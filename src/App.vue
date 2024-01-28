@@ -6,7 +6,11 @@
         </div>
         <!-- modifica branch 5 -->
         <!-- <BattleLogic /> -->
-        <router-view class="router"></router-view>
+        <router-view v-slot="{ Component }" class="router">
+            <transition name="slide-fade">
+                <component :is="Component" :key="$route.path" />
+            </transition>
+        </router-view>
     </section>
     <FooterComponent id="footer-com" />
 </template>
@@ -33,7 +37,7 @@ export default {
             lifeTotaleGiocatore: '',
             lifeTotalePC: '',
             vincitore: '',
-            
+
             //turno: ''
         }
     },
@@ -122,5 +126,19 @@ export default {
     height: 100%;
     overflow: hidden;
     position: fixed;
+}
+
+.slide-fade-enter-active {
+    transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+    transition: all 0.4s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+    transform: translateY(10px);
+    opacity: 0;
 }
 </style>
